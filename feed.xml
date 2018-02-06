@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-06T10:38:15+08:00</updated><id>http://localhost:4000/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang 控制流</title><link href="http://localhost:4000/golang/2018/02/06/golang-controlflow.html" rel="alternate" type="text/html" title="Golang 控制流" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/06/golang-controlflow</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/06/golang-controlflow.html">&lt;h1 id=&quot;for---loop&quot;&gt;for - loop&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://g10guang.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://g10guang.com/" rel="alternate" type="text/html" /><updated>2018-02-06T11:30:22+08:00</updated><id>http://g10guang.com/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang 控制流</title><link href="http://g10guang.com/golang/2018/02/06/golang-controlflow.html" rel="alternate" type="text/html" title="Golang 控制流" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/06/golang-controlflow</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/06/golang-controlflow.html">&lt;h1 id=&quot;for---loop&quot;&gt;for - loop&lt;/h1&gt;
 
 &lt;p&gt;以下代码省略 condition statement 将会引起无限循环&lt;/p&gt;
 
@@ -97,7 +97,7 @@ default
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hello
 AAAA
 world
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">for - loop</summary></entry><entry><title type="html">Golang 并发基础</title><link href="http://localhost:4000/golang/2018/02/06/golang-concurrent.html" rel="alternate" type="text/html" title="Golang 并发基础" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/06/golang-concurrent</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/06/golang-concurrent.html">&lt;h1 id=&quot;goroutine&quot;&gt;goroutine&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">for - loop</summary></entry><entry><title type="html">Golang 并发基础</title><link href="http://g10guang.com/golang/2018/02/06/golang-concurrent.html" rel="alternate" type="text/html" title="Golang 并发基础" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/06/golang-concurrent</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/06/golang-concurrent.html">&lt;h1 id=&quot;goroutine&quot;&gt;goroutine&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;A goroutine is a light weight thread managed by the Go runtime.&lt;/p&gt;
@@ -250,7 +250,7 @@ world
 
 &lt;p&gt;goroutine 不是 thread，每一个 goroutine 都拥有一个自己的调用栈。goroutine 开销很低，可以同时开启上千个 goroutine。&lt;/p&gt;
 
-&lt;p&gt;有可能一个 thread 中有上千个 goroutine。goroutine 多路动态复用 thread，也就是说真正执行计算的还是 thread，但是一个 thread 可能利用异步等技术来 concurrent 并发多个 goroutine 执行，并且减少切换 thread 上下文的成本&lt;/p&gt;</content><author><name></name></author><summary type="html">goroutine</summary></entry><entry><title type="html">Golang 常用命令</title><link href="http://localhost:4000/golang/2018/02/05/golang-flequenct-command.html" rel="alternate" type="text/html" title="Golang 常用命令" /><published>2018-02-05T09:00:05+08:00</published><updated>2018-02-05T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/05/golang-flequenct-command</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/05/golang-flequenct-command.html">&lt;h1 id=&quot;go-基本命令给&quot;&gt;go 基本命令给&lt;/h1&gt;
+&lt;p&gt;有可能一个 thread 中有上千个 goroutine。goroutine 多路动态复用 thread，也就是说真正执行计算的还是 thread，但是一个 thread 可能利用异步等技术来 concurrent 并发多个 goroutine 执行，并且减少切换 thread 上下文的成本&lt;/p&gt;</content><author><name></name></author><summary type="html">goroutine</summary></entry><entry><title type="html">Golang 常用命令</title><link href="http://g10guang.com/golang/2018/02/05/golang-flequenct-command.html" rel="alternate" type="text/html" title="Golang 常用命令" /><published>2018-02-05T09:00:05+08:00</published><updated>2018-02-05T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/05/golang-flequenct-command</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/05/golang-flequenct-command.html">&lt;h1 id=&quot;go-基本命令给&quot;&gt;go 基本命令给&lt;/h1&gt;
 
 &lt;h2 id=&quot;go-install&quot;&gt;go install&lt;/h2&gt;
 
@@ -447,7 +447,7 @@ go build
 
 &lt;h2 id=&quot;go-help-cmd&quot;&gt;go help cmd&lt;/h2&gt;
 
-&lt;p&gt;查看某条命令的帮助文档&lt;/p&gt;</content><author><name></name></author><summary type="html">go 基本命令给</summary></entry><entry><title type="html">Golang 反射</title><link href="http://localhost:4000/golang/2018/02/04/golang-reflect.html" rel="alternate" type="text/html" title="Golang 反射" /><published>2018-02-04T09:00:05+08:00</published><updated>2018-02-04T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/04/golang-reflect</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/04/golang-reflect.html">&lt;h1 id=&quot;反射&quot;&gt;反射&lt;/h1&gt;
+&lt;p&gt;查看某条命令的帮助文档&lt;/p&gt;</content><author><name></name></author><summary type="html">go 基本命令给</summary></entry><entry><title type="html">Golang 反射</title><link href="http://g10guang.com/golang/2018/02/04/golang-reflect.html" rel="alternate" type="text/html" title="Golang 反射" /><published>2018-02-04T09:00:05+08:00</published><updated>2018-02-04T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/04/golang-reflect</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/04/golang-reflect.html">&lt;h1 id=&quot;反射&quot;&gt;反射&lt;/h1&gt;
 
 &lt;p&gt;曾阅读&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;amp;mid=2650996069&amp;amp;idx=1&amp;amp;sn=63e7f5d5f91f9d84f1c3278426f6edf6&amp;amp;chksm=bdbf05368ac88c20c273f325acc257811d6ee7534df30ace674f5c7eeb0c7986984dca209131&amp;amp;scene=21#wechat_redirect&quot;&gt;今日头条中关于 Golang 优化&lt;/a&gt;的一篇文章，说尽可能不要用反射&lt;/p&gt;
 
@@ -603,7 +603,7 @@ go build
 {world 100}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;如果 Human 中的名字是小写 name，那么就会引发错误：&lt;code class=&quot;highlighter-rouge&quot;&gt;panic: reflect: reflect.Value.SetString using value obtained using unexported field&lt;/code&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">反射</summary></entry><entry><title type="html">Golang 更多类型</title><link href="http://localhost:4000/golang/2018/02/02/golang-moretype.html" rel="alternate" type="text/html" title="Golang 更多类型" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/02/golang-moretype</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/02/golang-moretype.html">&lt;h1 id=&quot;pointer&quot;&gt;Pointer&lt;/h1&gt;
+&lt;p&gt;如果 Human 中的名字是小写 name，那么就会引发错误：&lt;code class=&quot;highlighter-rouge&quot;&gt;panic: reflect: reflect.Value.SetString using value obtained using unexported field&lt;/code&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">反射</summary></entry><entry><title type="html">Golang 更多类型</title><link href="http://g10guang.com/golang/2018/02/02/golang-moretype.html" rel="alternate" type="text/html" title="Golang 更多类型" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/02/golang-moretype</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/02/golang-moretype.html">&lt;h1 id=&quot;pointer&quot;&gt;Pointer&lt;/h1&gt;
 
 &lt;p&gt;与 C 不一样，Go 中不支持关于指针的运算，比如 ptr ++ 等操作。&lt;/p&gt;
 
@@ -854,7 +854,7 @@ go build
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;内层函数引用外层函数的变量，这样会促使外层变量被保存在内存中。&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)&quot;&gt;闭包维基百科&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Pointer</summary></entry><entry><title type="html">Golang 方法</title><link href="http://localhost:4000/golang/2018/02/02/golang-method.html" rel="alternate" type="text/html" title="Golang 方法" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/02/golang-method</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/02/golang-method.html">&lt;h1 id=&quot;method&quot;&gt;method&lt;/h1&gt;
+&lt;p&gt;内层函数引用外层函数的变量，这样会促使外层变量被保存在内存中。&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)&quot;&gt;闭包维基百科&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Pointer</summary></entry><entry><title type="html">Golang 方法</title><link href="http://g10guang.com/golang/2018/02/02/golang-method.html" rel="alternate" type="text/html" title="Golang 方法" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/02/golang-method</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/02/golang-method.html">&lt;h1 id=&quot;method&quot;&gt;method&lt;/h1&gt;
 
 &lt;p&gt;method 不同于普通 fuction，method 有指定接受者的参数&lt;/p&gt;
 
@@ -1035,7 +1035,7 @@ go build
   &lt;li&gt;[]byte slice 用于承装读取的数据&lt;/li&gt;
   &lt;li&gt;n 表示该次读取，成功读取了多少个字节&lt;/li&gt;
   &lt;li&gt;err 如果已经到了流末尾，&lt;code class=&quot;highlighter-rouge&quot;&gt;err = io.EOF&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">method</summary></entry><entry><title type="html">Golang 基础</title><link href="http://localhost:4000/golang/2018/02/02/golang-basic.html" rel="alternate" type="text/html" title="Golang 基础" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/02/golang-basic</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/02/golang-basic.html">&lt;h1 id=&quot;exported-name&quot;&gt;Exported Name&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">method</summary></entry><entry><title type="html">Golang 基础</title><link href="http://g10guang.com/golang/2018/02/02/golang-basic.html" rel="alternate" type="text/html" title="Golang 基础" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/02/golang-basic</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/02/golang-basic.html">&lt;h1 id=&quot;exported-name&quot;&gt;Exported Name&lt;/h1&gt;
 
 &lt;p&gt;在 package 中，有且只有以大写开头的变量、函数、类型会被外面所访问&lt;/p&gt;
 
@@ -1142,7 +1142,7 @@ complex64 complex128
 
 &lt;p&gt;new(T) 创建某个地址空间，返回对应的地址，然后将属性初始化为 zero value&lt;/p&gt;
 
-&lt;p&gt;make() 创建 slice / map / chan，并且完成对该类型的初始化，返回的是引用&lt;/p&gt;</content><author><name></name></author><summary type="html">Exported Name</summary></entry><entry><title type="html">《黑旗：ISIS的崛起》读后感</title><link href="http://localhost:4000/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html" rel="alternate" type="text/html" title="《黑旗：ISIS的崛起》读后感" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html">&lt;p&gt;如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。&lt;/p&gt;
+&lt;p&gt;make() 创建 slice / map / chan，并且完成对该类型的初始化，返回的是引用&lt;/p&gt;</content><author><name></name></author><summary type="html">Exported Name</summary></entry><entry><title type="html">《黑旗：ISIS的崛起》读后感</title><link href="http://g10guang.com/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html" rel="alternate" type="text/html" title="《黑旗：ISIS的崛起》读后感" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read</id><content type="html" xml:base="http://g10guang.com/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html">&lt;p&gt;如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。&lt;/p&gt;
 
 &lt;p&gt;我是从比尔盖茨微信公众号中了解到有该书籍的存在的，能够引起我的兴趣的就是一个恐怖组织的头目–扎卡维是如何具有如此巨大的魅力能够让人们跟随他从事各种恐怖袭击，甚至是自杀式恐怖行为。&lt;/p&gt;
 
@@ -1204,7 +1204,38 @@ complex64 complex128
 
 &lt;p&gt;上述这么多的恐怖行为大部分都是借助了极端宗教的力量而达到的，无论是“圣战”的号召还是“上天堂，下地狱”的承诺。在&lt;strong&gt;《人类简史》&lt;/strong&gt;和&lt;strong&gt;《未来简史》&lt;/strong&gt;中都极大地强调了宗教的作用，宗教一开始的存在是为了解释某个当时人们还无法的解释的现象，或者帮助人们克服内心的恐惧。人类发展了这么旧，几乎每个民族都有各自的信仰，其中数基督教、伊斯兰教、佛教比较普遍，但是随着知识的发展，人类能够利用已有的知识去解释各种现象，而不是借助宗教去讲故事，我们年青一代似乎也没有如此宗教信仰，那么未来宗教会如何发展？未来的人会遗忘宗教吗？&lt;/p&gt;
 
-&lt;p&gt;待未来有空阅读《未来简史》或许能够得到答案，其作者是以色列著名的历史学家、宗教学家赫拉利。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。</summary></entry><entry><title type="html">面试斗鱼后端工程师后感</title><link href="http://localhost:4000/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC.html" rel="alternate" type="text/html" title="面试斗鱼后端工程师后感" /><published>2017-12-01T09:00:05+08:00</published><updated>2017-12-01T09:00:05+08:00</updated><id>http://localhost:4000/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC</id><content type="html" xml:base="http://localhost:4000/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC.html">&lt;p&gt;前两天去了面试ofo的后端工程师，被吊打，具体经历可以查看&lt;a href=&quot;https://zhuanlan.zhihu.com/p/30449067&quot;&gt;《面试ofo后端工程师后感》&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;待未来有空阅读《未来简史》或许能够得到答案，其作者是以色列著名的历史学家、宗教学家赫拉利。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。</summary></entry><entry><title type="html">开发软件和小脚本的区别</title><link href="http://g10guang.com/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html" rel="alternate" type="text/html" title="开发软件和小脚本的区别" /><published>2018-01-20T09:00:05+08:00</published><updated>2018-01-20T09:00:05+08:00</updated><id>http://g10guang.com/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB</id><content type="html" xml:base="http://g10guang.com/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html">&lt;p&gt;近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，&lt;a href=&quot;https://github.com/g10guang/WHUT_Courses_System&quot;&gt;Github仓库&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;以下是本文的小定义：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;小脚本：容错性很差，是给专门人使用的，需要使用人对脚本逻辑有一定了解，比如Python脚本&lt;/li&gt;
+  &lt;li&gt;软件：开放给大众使用，需要提供好的 UI，需要很好的容错性，需要反馈给用户信息&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果只是供笔者用于的小脚本，完成抢课逻辑并不需要多少的代码量，可能几个小时分析问题，写几十行小脚本就完事了。但是我萌生了一个开发一个帮助同学抢课的软件，免得同学在抢课时分候着电脑、手机、平板点点点，最后却什么都没得到。&lt;/p&gt;
+
+&lt;p&gt;项目中需要爬取选课系统中的信息，就需要用到了爬虫，于是我屁颠屁颠地邀请懂爬虫的友人参与我的开发中。&lt;/p&gt;
+
+&lt;p&gt;我是平常研究的后端开发比较多，但是软件需要提供用户 UI，于是我匆匆忙忙地学习了TkInter的基本用法，随机开始了设计UI，由于不熟悉，开发过程也是不断地Google。很快用户界面开发得差不多了，但是由于Python的GIL存在的，为了提供用户体验，不让界面一卡一卡的，我又去研究了Python的多进程以及多线程（PS：采用的思路是抢课任务分配到新进程中进行，而且每添加一个新的任务就创建新的线程去执行）&lt;/p&gt;
+
+&lt;p&gt;其后爬虫的第一个方案似乎出了点问题，而且使用了Scrapy对于本项目有点笨重，笔者后面就去学了 requests+BeautifulSoup 作为简单的爬虫，去爬取特定的信息，requests模拟登陆拿到响应的html页面，BeautifulSoup 解析页面提取相关信息。&lt;/p&gt;
+
+&lt;p&gt;由于学校选课网站是外包项目，html写得非常凌乱（还有注释&lt;del&gt;），每个选课的表格还不一样，还要为专门为某个选课做特殊处理。（可能这就是选课系统的防爬虫的措施吧&lt;/del&gt;）&lt;/p&gt;
+
+&lt;p&gt;幸好，requests与BeatifulSoup都提供了良好的文档和API，整个爬虫开发从学习到完成也就是花了两天时间而已。但是依然无法做到百分百的覆盖，我只能说爬虫在非抢课期间能够成功执行，但是如果在真正抢课期间，选课系统随时宕机，爬虫也就无法保证一定能正确无误地抓去数据。&lt;/p&gt;
+
+&lt;p&gt;怎么样能够提升用于体验，提供用户真正需要的功能，这确实是需要大量的思考。这也就是为什么腾讯、知乎等企业招聘员工要求应聘者需要有产品sense。&lt;/p&gt;
+
+&lt;p&gt;整个过程下来，感觉开发一个给予大众使用的软件成本非常高，怪不得web中要强调前后端分离，这样才能够做到前端能够注重用户体验，后端能够专注业务逻辑。整个团队的开发效率才会有所提升，术业有专攻，也不需要有那么一群人每个人都精通所有，（即使是前端也有专注与写JS逻辑、CSS样式）但付出的就是沟通成本。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最后思考：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一个网站防爬虫是多么重要，之前看朋友爬美团、携程的数据非常有趣，真实显示的数据与HTML中的数据相差是非常大的，他们之间有一些转换规则，或者是显示的价格是从图片中一个一个数字扣下来的，用心良苦，这给爬虫爬取有用的信息带来了很大的难度。有兴趣的朋友可以去尝试一下。&lt;/p&gt;
+
+&lt;p&gt;之前老师上课说真正项目中有一大半代码都是防御型代码，为了保证代码的鲁棒性。&lt;/p&gt;
+
+&lt;p&gt;如果这个世界每个人都那么遵守规则，这个社会做锁的成本会低了多少。&lt;/p&gt;</content><author><name></name></author><summary type="html">近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，Github仓库</summary></entry><entry><title type="html">面试斗鱼后端工程师后感</title><link href="http://g10guang.com/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC.html" rel="alternate" type="text/html" title="面试斗鱼后端工程师后感" /><published>2017-12-01T09:00:05+08:00</published><updated>2017-12-01T09:00:05+08:00</updated><id>http://g10guang.com/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC</id><content type="html" xml:base="http://g10guang.com/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC.html">&lt;p&gt;前两天去了面试ofo的后端工程师，被吊打，具体经历可以查看&lt;a href=&quot;https://zhuanlan.zhihu.com/p/30449067&quot;&gt;《面试ofo后端工程师后感》&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;昨天我参加了斗鱼的校园招聘笔试以及面试，从下午一点半一直战斗到晚上的六点半，特别是面试过程中，对精神消耗很大，一个会议室狭小、密闭的空间里，一直进行面试。技术一面、技术二面、三面（我不确定第三面是否是HR可能更加倾向于技术团队的管理）、HR四面。&lt;/p&gt;
 
@@ -1314,42 +1345,4 @@ complex64 complex128
   &lt;li&gt;敢于问为什么，在面试结束前，可以请面试官解答一些问题&lt;/li&gt;
   &lt;li&gt;平时学习要把其中的“道”弄清楚&lt;/li&gt;
   &lt;li&gt;最好有一两个项目可以让面试官发问，不然面试官自由发挥，后果自负&lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">前两天去了面试ofo的后端工程师，被吊打，具体经历可以查看《面试ofo后端工程师后感》。</summary></entry><entry><title type="html">面试ofo后端工程师后感</title><link href="http://localhost:4000/%E9%9D%A2%E7%BB%8F/2017/11/26/%E9%9D%A2%E8%AF%95ofo.html" rel="alternate" type="text/html" title="面试ofo后端工程师后感" /><published>2017-11-26T09:00:05+08:00</published><updated>2017-11-26T09:00:05+08:00</updated><id>http://localhost:4000/%E9%9D%A2%E7%BB%8F/2017/11/26/%E9%9D%A2%E8%AF%95ofo</id><content type="html" xml:base="http://localhost:4000/%E9%9D%A2%E7%BB%8F/2017/11/26/%E9%9D%A2%E8%AF%95ofo.html">&lt;h1 id=&quot;面试缘由&quot;&gt;面试缘由&lt;/h1&gt;
-
-&lt;p&gt;我今年武汉理工大三软件工程学生，我在这文章《回顾大学两年》对大学两年进行了回顾，由于对目前需要掌握的知识点和未来从事的方向并不是很明确，听从了实验室中师兄的建议，先去尝试一下招聘，感受一下被吊打的感觉，听听面试官给点意见。&lt;/p&gt;
-
-&lt;h1 id=&quot;ofo校园招聘宣讲&quot;&gt;ofo校园招聘宣讲&lt;/h1&gt;
-
-&lt;p&gt;昨天晚上，ofo来到了武汉理工进行校园招聘宣讲。其中说到了很多ofo的价值观、理念，“&lt;strong&gt;共享单车的原创者&amp;amp;领骑者&lt;/strong&gt;”，他们的价值观确实是很动人。&lt;/p&gt;
-
-&lt;p&gt;由于我是学后端开发的，已经学了后端近一年，做了好几个项目，使用过 JAVA 的 Spring + SpringMVC + Hibernate + MySQL 做过一个外包项目；使用过 Python 的 Flask + MongoDB 搭建过&lt;a href=&quot;http://whoyoung.me/&quot;&gt;个人博客&lt;/a&gt;，&lt;a href=&quot;https://github.com/g10guang/whoyoungblog&quot;&gt;github仓库&lt;/a&gt;；使用过 ZeroMQ 来搭建桌面应用（采用的是B/S架构，所以也是前后端的实现逻辑）。整个学习过程使用开源框架多，很少接触到底层计算机网络和数据结构与算法实现，所以在用别人的轮子多后，就感觉很难提升，想过转机器学习和大数据方向。&lt;/p&gt;
-
-&lt;p&gt;当晚ofo中的校招技术负责人给了我很多建议和指导意见，首先他指出了现在机器学习和大数据方面的火热，薪资待遇都很好，但是假如校招出去竞争对手都是有三年研究该方面经验的研究生，所以本科生在机器学习和大数据上，学历和科研能力都没有竞争优势。他建议我先打好基础，把基本的数据结构和算法弄清楚，打好数学的底子，语言和框架只是其次，最要的是基础知识够扎实。（《剑指offer》里提到，面试官会关注应聘者的5种素质：扎实的基础知识、能写高质量的代码、分析问题时思路清晰、能优化时间、空间效率以及学习沟通等软能力）。&lt;/p&gt;
-
-&lt;p&gt;他当晚给了我一张面试的直通卡，我当时确实很兴奋，因为当晚的技术方面应聘者很少，可能是ofo在宣传方面没有做好准备，或者是优秀的人已经拿到了心仪的&lt;strong&gt;offer&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://pic2.zhimg.com/v2-595df3d29f22f2d1165fb4ff7276e00d_b.jpg&quot; alt=&quot;ofo面试直通卡&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;面试经历&quot;&gt;面试经历&lt;/h1&gt;
-
-&lt;p&gt;我当天晚上还纠结了到底应不应该去，毕竟我不是应届生，变相在浪费面试官的时间，而且自己准备得不充分，去了也只有被吊打的机会了。但最后我还是决定去体验学习一番，也是积累面试经验和为了面试官给的指导意见。事实证明，去了还是很值得，了解到了很多东西，也清晰了未来方向。&lt;/p&gt;
-
-&lt;p&gt;面试官用1分钟看我的简历，并让我做个简短的自我介绍。然后他问了我4个问题，我一个都没回答上。。。。。。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://pic4.zhimg.com/v2-9aaed32abb15e559a6980a2014b27b1b_b.jpg&quot; alt=&quot;ofo面试题&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;至于前面3个我确实是不了解，因为我本科写代码一直都是用别人的轮子，特别是使用了 Python 以后，就一直停留在使用轮子的状态，也没太多了解底层实现以及不同实现方法的区别。使用轮子的好处是可以把精力集中在业务逻辑上，缺点是出了问题不好解决，因为不懂底层是如何实现，也就无法对性能瓶颈进行优化。&lt;/p&gt;
-
-&lt;p&gt;最后一道题，面试官给了5分钟让我想个思路，我一开始想到的解决方案是先把数组重新排序，然后使用二分查找。但是他说假如这个数组有 100 万个元素，那这样岂不是很浪费空间？我当时就懵逼了（《剑指offer》提到，当面试官问了很简单的问题的时候，应聘者应该注重细节，写出完整、鲁棒的代码；如果遇到复杂问题，应聘者可以通过画图、举具体例子分析和分解复杂问题等方法先理清思路再动手编程），最后面试官给了我答案。&lt;/p&gt;
-
-&lt;p&gt;4个问题没答上后，他确定我没戏后，很热心地给我讲解了很多发展方面的问题。&lt;/p&gt;
-
-&lt;p&gt;他说我的简历上写了几个项目，但是对基本的东西却不了解，我能够去一个不错的公司，但是很快就会遇到上升瓶颈，因为核心的问题我无法解决；对 MySQL 底层引擎不了解，不熟悉网络，那么我也很难具有架构的能力。一般大公司会对应聘的基础知识是否扎实很在意，而外包公司在意应聘者是否熟悉某种特定语言和具体框架。&lt;/p&gt;
-
-&lt;p&gt;从事互联网方向的同学，一开始需要尽可能找一个大平台（公司），因为如果以后跳槽或者从事其他领域，这个平台背景就相当于学历，默认大平台出来的员工不会差。而且大平台有足够完善的上升培养机制，只要能力够强就有机会接触更优秀的人才和得到向上发展的机会。除了做技术，还可以发掘自己软实力，未来有机会可以做 &lt;strong&gt;leader&lt;/strong&gt; 或者 &lt;strong&gt;PM&lt;/strong&gt; 之类的岗位。&lt;/p&gt;
-
-&lt;p&gt;他在我离开前让我加他微信，说他感觉我还是很困惑，让我有问题可以咨询他。&lt;/p&gt;
-
-&lt;h1 id=&quot;总结&quot;&gt;总结&lt;/h1&gt;
-
-&lt;p&gt;在大平台也能够遇到好的导师，比如向面试官一样nice的导师，会对职业发展很有帮助。如果你像我一样迷茫，建议你也参加一下招聘，了解一下公司的需求；有些人感受到自己竞争力不足选择读研；有些人对未来的职业有了更好的规划。&lt;/p&gt;</content><author><name></name></author><summary type="html">面试缘由</summary></entry></feed>
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">前两天去了面试ofo的后端工程师，被吊打，具体经历可以查看《面试ofo后端工程师后感》。</summary></entry></feed>
