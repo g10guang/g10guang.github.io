@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Golang 方法 | 刘曦光</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Golang 方法" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="method" />
+<meta property="og:description" content="method" />
+<link rel="canonical" href="http://localhost:4000/golang/2018/02/02/golang-method.html" />
+<meta property="og:url" content="http://localhost:4000/golang/2018/02/02/golang-method.html" />
+<meta property="og:site_name" content="刘曦光" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-02-02T09:00:05+08:00" />
+<script type="application/ld+json">
+{"description":"method","@type":"BlogPosting","url":"http://localhost:4000/golang/2018/02/02/golang-method.html","headline":"Golang 方法","dateModified":"2018-02-02T09:00:05+08:00","datePublished":"2018-02-02T09:00:05+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/golang/2018/02/02/golang-method.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="刘曦光" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">刘曦光</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Golang 方法</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-02-02T09:00:05+08:00" itemprop="datePublished">
+        
+        Feb 2, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="method">method</h1>
+
+<p>method 不同于普通 fuction，method 有指定接受者的参数</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// 定义结构体</span><span class="x">
+</span><span class="k">type</span><span class="x"> </span><span class="n">Vertex</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">X</span><span class="p">,</span><span class="x"> </span><span class="n">Y</span><span class="x"> </span><span class="kt">int</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="c">// 定义结构体的方法</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">v</span><span class="x"> </span><span class="n">Vertex</span><span class="p">)</span><span class="x"> </span><span class="n">Abs</span><span class="p">()</span><span class="x"> </span><span class="kt">float64</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="c">// 距离</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">math</span><span class="o">.</span><span class="n">Sqrt</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">X</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">X</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Y</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Y</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">v</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Vertex</span><span class="p">{</span><span class="m">3</span><span class="p">,</span><span class="x"> </span><span class="m">4</span><span class="p">}</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">Abs</span><span class="p">())</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>Go 中可以给每一个每一个类型声明方法，而不仅仅是 <em>struct</em> 类型</p>
+
+<p>类型别名：<code class="highlighter-rouge">type MyFloat float64</code>，此后就可以使用 <code class="highlighter-rouge">MyFloat</code> 来代替 float64</p>
+
+<p>在方法传递中，<em>struct</em> 发生的是值复制传递</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Vertex</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">X</span><span class="x"> </span><span class="kt">float64</span><span class="x">
+    </span><span class="n">Y</span><span class="x"> </span><span class="kt">float64</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="c">// 不会改变外围调用者的X Y值</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">v</span><span class="x"> </span><span class="n">Vertex</span><span class="p">)</span><span class="x"> </span><span class="n">A</span><span class="p">(</span><span class="n">f</span><span class="x"> </span><span class="kt">float64</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">v</span><span class="o">.</span><span class="n">X</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">X</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="n">f</span><span class="x">
+    </span><span class="n">v</span><span class="o">.</span><span class="n">Y</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Y</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="n">f</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="c">// 传递指针，外围和内层使用的是同一个地址，修改会影响外围调用者</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">v</span><span class="x"> </span><span class="o">*</span><span class="n">Vertex</span><span class="p">)</span><span class="x"> </span><span class="n">B</span><span class="p">(</span><span class="n">f</span><span class="x"> </span><span class="kt">float64</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">v</span><span class="o">.</span><span class="n">X</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">X</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="n">f</span><span class="x">
+    </span><span class="n">v</span><span class="o">.</span><span class="n">Y</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Y</span><span class="x"> </span><span class="o">*</span><span class="x"> </span><span class="n">f</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">v</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">Vertex</span><span class="p">{</span><span class="m">3</span><span class="p">,</span><span class="x"> </span><span class="m">4</span><span class="p">}</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="o">&amp;</span><span class="n">v</span><span class="p">)</span><span class="x">
+    </span><span class="n">v</span><span class="o">.</span><span class="n">A</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="x">
+    </span><span class="n">v</span><span class="o">.</span><span class="n">B</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp;{3 4}
+{3 4}
+{30 40}
+</code></pre></div></div>
+
+<p>Go 中函数传递都是值传递，进行了拷贝复制。Go 中采用引用传递的一个地方是闭包中。</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="m">3</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">defer</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+1
+0
+</code></pre></div></div>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="m">3</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">defer</span><span class="x"> </span><span class="k">func</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="x">
+    </span><span class="p">}()</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+3
+3
+</code></pre></div></div>
+
+<p>所有的匿名函数都是引用了外部 i，所以输出结果都是相同的</p>
+
+<p>为了防止上述情况，我们应该把 i 当做函数参数传递</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="m">3</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">defer</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">i</span><span class="x"> </span><span class="kt">int</span><span class="p">){</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="x">
+    </span><span class="p">}(</span><span class="n">i</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+1
+0
+</code></pre></div></div>
+
+<p>函数使用<em>指针</em>传递参数的两个主要原因：</p>
+<ul>
+  <li>需要修改调用者的值</li>
+  <li>避免大数据结构的复制</li>
+</ul>
+
+<h1 id="interface">interface</h1>
+
+<p>Go 中使得 interface 声明接口和具体 struct 实现方法分离，只要某个 struct 实现了所有 interface 接口的方法，那么该 struct 就是 interface 类型</p>
+
+<p>如果接口 <code class="highlighter-rouge">var i I</code> 被赋予了 nil，那么方法中依然可进行方法调用，并不会触发空指针异常等，但是方法中传递的值是 <code class="highlighter-rouge">nil</code></p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span><span class="x"> </span><span class="p">{}</span><span class="x">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">var i interface{}</code> 任何类型的值都可以赋予给 <code class="highlighter-rouge">i</code>，空接口常用在处理类型未知的情况下，例如<code class="highlighter-rouge">fmt.Println()</code> 可以接收任意数量任意类型的参数 <code class="highlighter-rouge">func Print(a ...interface{})</code></p>
+
+<p>interface type assertion</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="n">I</span><span class="x">
+</span><span class="n">i</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">T</span><span class="p">{</span><span class="s">"hello world"</span><span class="p">}</span><span class="x">
+</span><span class="n">t</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">i</span><span class="o">.</span><span class="p">(</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<p>如果 i 中不是 T 类型，就发生 panic</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="n">I</span><span class="x">
+</span><span class="n">i</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">T</span><span class="p">{</span><span class="s">"hello world"</span><span class="p">}</span><span class="x">
+</span><span class="n">t</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">i</span><span class="o">.</span><span class="p">(</span><span class="n">F</span><span class="p">)</span><span class="x">  </span><span class="c">// panic</span><span class="x">
+</span></code></pre></div></div>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="n">I</span><span class="x">
+</span><span class="n">i</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">T</span><span class="p">{</span><span class="s">"hello world"</span><span class="p">}</span><span class="x">
+</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">ok</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">i</span><span class="o">.</span><span class="p">(</span><span class="n">F</span><span class="p">)</span><span class="x">  </span><span class="c">// no panic</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="x"> </span><span class="n">ok</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<p>如果 type assertion 成立，那么 <code class="highlighter-rouge">ok == true</code>，t 为对应的 T 值；否则 <code class="highlighter-rouge">ok == false</code>，t 为 类型 F 的 zero value。</p>
+
+<h1 id="stringer-接口">Stringer 接口</h1>
+
+<p>Golang 中使用 Stringer 接口来打印格式化</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Stringer</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">String</span><span class="p">()</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>只要实现了 <code class="highlighter-rouge">String() string</code> 方法，那么使用 <code class="highlighter-rouge">fmt.Sprintf("%v", v)</code> 就会自动调用 <code class="highlighter-rouge">String() string 方法</code>，输出格式化字符串。</p>
+
+<h1 id="error-接口">error 接口</h1>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Error</span><span class="p">()</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>自定义异常只需要实现方法 <code class="highlighter-rouge">Error() string</code></p>
+
+<h1 id="ioreader">io.Reader</h1>
+
+<p>Go 中定义一个 Reader 接口</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Reader</span><span class="x"> </span><span class="k">interface</span><span class="p">{</span><span class="x">
+    </span><span class="k">func</span><span class="x"> </span><span class="n">Read</span><span class="p">(</span><span class="n">b</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="n">n</span><span class="x"> </span><span class="kt">int</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>大多数标准库都实现了该接口，比如文件、网络、压缩、密码等等，我们可以通过该接口方便地访问数据</p>
+
+<ul>
+  <li>[]byte slice 用于承装读取的数据</li>
+  <li>n 表示该次读取，成功读取了多少个字节</li>
+  <li>err 如果已经到了流末尾，<code class="highlighter-rouge">err = io.EOF</code></li>
+</ul>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/golang/2018/02/02/golang-method.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">刘曦光</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              刘曦光
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:g10guang@foxmail.com">g10guang@foxmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/g10guang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">g10guang</span></a></li>
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
