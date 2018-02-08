@@ -1,4 +1,165 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://g10guang.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://g10guang.com/" rel="alternate" type="text/html" /><updated>2018-02-06T11:30:22+08:00</updated><id>http://g10guang.com/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang 控制流</title><link href="http://g10guang.com/golang/2018/02/06/golang-controlflow.html" rel="alternate" type="text/html" title="Golang 控制流" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/06/golang-controlflow</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/06/golang-controlflow.html">&lt;h1 id=&quot;for---loop&quot;&gt;for - loop&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-08T14:35:26+08:00</updated><id>http://localhost:4000/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang 创建文件权限问题</title><link href="http://localhost:4000/golang/2018/02/08/golang-make-dir-problem.html" rel="alternate" type="text/html" title="Golang 创建文件权限问题" /><published>2018-02-08T09:00:05+08:00</published><updated>2018-02-08T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/08/golang-make-dir-problem</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/08/golang-make-dir-problem.html">&lt;h1 id=&quot;问题描述&quot;&gt;问题描述&lt;/h1&gt;
+
+&lt;p&gt;今天学习 Golang 文件操作实践时，当我创建一个文件（夹）出现文件权限与我代码设置不一致的问题&lt;/p&gt;
+
+&lt;p&gt;以下为我创建文件夹的代码：&lt;/p&gt;
+
+&lt;div class=&quot;language-golang highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MkdirAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g10guang/t1/t2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0666&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir g10guang/t1: permission denied
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;g10guang 文件夹创建成功，可是下面的 t1 文件夹创建失败&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;ls -l&lt;/code&gt; 命令查看 g10guang 文件夹信息&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drw-rw-r-- 2 g10guang g10guang 4096 Feb  8 13:23 g10guang
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;linux-权限&quot;&gt;Linux 权限&lt;/h1&gt;
+
+&lt;p&gt;比如：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;drw-rw-r-- 2 g10guang g10guang 4096 Feb  8 13:23 g10guang
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;开头有 10 个字符，我们来一一分析：&lt;/p&gt;
+
+&lt;p&gt;第一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;d&lt;/code&gt; 代表这是一个文件夹，&lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; 为文件，&lt;code class=&quot;highlighter-rouge&quot;&gt;l&lt;/code&gt; 为链接&lt;/p&gt;
+
+&lt;p&gt;当前用户与文件关系分为三个等级：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;所有者&lt;/li&gt;
+  &lt;li&gt;同组用户&lt;/li&gt;
+  &lt;li&gt;其他用户&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而后面的 9 个字符分别代表文件所有者、同组用户、其他用户对文件的读写权限&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt; 读权限&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;w&lt;/code&gt; 写权限&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt; 执行权限&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; 不具有该权限&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rwx&lt;/code&gt; ==&amp;gt; 111
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rw-&lt;/code&gt; ==&amp;gt; 110
+&lt;code class=&quot;highlighter-rouge&quot;&gt;r--&lt;/code&gt; ==&amp;gt; 100
+&lt;code class=&quot;highlighter-rouge&quot;&gt;---&lt;/code&gt; ==&amp;gt; 000&lt;/p&gt;
+
+&lt;p&gt;如权限 &lt;code class=&quot;highlighter-rouge&quot;&gt;-rwxrw-r--&lt;/code&gt; 表示这是一个文件，文件所有者拥有读写执行权限、同组用户有读写权限、其他用户只有读权限&lt;/p&gt;
+
+&lt;p&gt;可以通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod&lt;/code&gt; 改变一个文件的权限，或者 &lt;code class=&quot;highlighter-rouge&quot;&gt;chown&lt;/code&gt; 改变文件的所有者&lt;/p&gt;
+
+&lt;p&gt;我们创建文件夹时候指定的权限是 &lt;code class=&quot;highlighter-rouge&quot;&gt;0666&lt;/code&gt;，这是一个八进制数字，拆分成二进制为 &lt;code class=&quot;highlighter-rouge&quot;&gt;110110110&lt;/code&gt;，也就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;rw-rw-rw-&lt;/code&gt;，但是为什么我们创建的文件夹的权限是 &lt;code class=&quot;highlighter-rouge&quot;&gt;rw-rw-r--&lt;/code&gt; 也就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;0664&lt;/code&gt; 呢？&lt;/p&gt;
+
+&lt;p&gt;其实我们创建文件夹、文件时候都是经过 Linux 系统调用完成的，所以这是 Linux 创建文件时候会把用户指定的权限 &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; 减去 &lt;code class=&quot;highlighter-rouge&quot;&gt;umask&lt;/code&gt;，而我本地 umask 为 &lt;code class=&quot;highlighter-rouge&quot;&gt;002&lt;/code&gt;。通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;umask&lt;/code&gt; 命令查看 umask&lt;/p&gt;
+
+&lt;h1 id=&quot;分析&quot;&gt;分析&lt;/h1&gt;
+
+&lt;p&gt;通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;g10guang&lt;/code&gt; 用户运行代码，文件夹当然所属于 &lt;code class=&quot;highlighter-rouge&quot;&gt;g10guang&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;尝试 &lt;code class=&quot;highlighter-rouge&quot;&gt;cd g10guang&lt;/code&gt;，出现错误，错误信息：&lt;code class=&quot;highlighter-rouge&quot;&gt;cd: permission denied: g10guang&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;文件夹是属于我的，我怎么不能够 &lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt; 呢？&lt;/p&gt;
+
+&lt;p&gt;原因是：需要 &lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt; 到一个文件夹，那么必须要有当前文件夹的执行权限 &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt;，Linux 下设计一切皆文件，文件夹也是一个特殊的文件&lt;/p&gt;
+
+&lt;p&gt;如果使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;os.MkdirAll&lt;/code&gt; 方法创建文件夹时，必须基于文件夹所有者 &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt; 执行权限以及 &lt;code class=&quot;highlighter-rouge&quot;&gt;w&lt;/code&gt; 写权限，为什么需要写权限，可以通过  &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; 去打开一个文件夹，可以看到文件夹里的信息（记得吗，文件夹也是文件），比如我一个文件夹通过 vim 打开的信息：&lt;/p&gt;
+
+&lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&quot; ============================================================================&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot; Netrw Directory Listing                                        (netrw v155)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;   /home/g10guang/Templates/blog&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;   Sorted by      name&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;   Sort sequence: [\/]$,\&amp;lt;core\%(\.\d\+\)\=\&amp;gt;,\.h$,\.c$,\.cpp$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.ba&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;   Quick Help: &amp;lt;F1&amp;gt;:help  -:go up dir  D:delete  R:rename  s:sort-by  x:special&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot; ==============================================================================&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;..&lt;/span&gt;/                                                                                                      
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;/
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;git/
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;sass&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;cache/
+_posts/
+_site/
+g10guang&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;github&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;io/
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;gitignore
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;gitmodules
+&lt;span class=&quot;m&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;html
+Gemfile
+Gemfile&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lock&lt;/span&gt;
+_config&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;yml
+about&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;md
+index&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;文件夹中记录着里面有哪些文件以及文件夹，其中 &lt;code class=&quot;highlighter-rouge&quot;&gt;xxx/&lt;/code&gt; 有 &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; 结尾的是文件夹，其他的是文件，所以在文件夹中创建一个文件夹需要改变文件夹信息，需要有写文件夹的权限&lt;/p&gt;
+
+&lt;h1 id=&quot;创建指定权限文件方法&quot;&gt;创建指定权限文件方法&lt;/h1&gt;
+
+&lt;p&gt;两种方法：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;改变 &lt;code class=&quot;highlighter-rouge&quot;&gt;umask&lt;/code&gt; 后再创建文件，其后再把 &lt;code class=&quot;highlighter-rouge&quot;&gt;umask&lt;/code&gt; 改为原来的 umask&lt;/li&gt;
+  &lt;li&gt;先创建文件，然后再改变文件的权限&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;方法一&quot;&gt;方法一&lt;/h2&gt;
+
+&lt;p&gt;改变 &lt;code class=&quot;highlighter-rouge&quot;&gt;umask&lt;/code&gt; 后再创建文件，其后再把 &lt;code class=&quot;highlighter-rouge&quot;&gt;umask&lt;/code&gt; 改为原来的 umask&lt;/p&gt;
+
+&lt;div class=&quot;language-golang highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;os&quot;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;syscall&quot;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;syscall&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Umask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;// 改为 0000 八进制&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;defer&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;syscall&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Umask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;// 改为原来的 umask&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MkdirAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g10guang/t1/t2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0766&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+		&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;方法二&quot;&gt;方法二&lt;/h2&gt;
+
+&lt;p&gt;先创建文件，然后再改变文件的权限&lt;/p&gt;
+
+&lt;div class=&quot;language-golang highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;os&quot;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MkdirAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g10guang/t1/t2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0777&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Chmod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g10guang&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0777&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Chmod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g10guang/t1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0777&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Chmod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;g10guang/t1/t2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0777&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;golang 还不支持递归更改多个文件夹的权限，所有需要一个一个调用。&lt;/p&gt;
+
+&lt;h1 id=&quot;总结&quot;&gt;总结&lt;/h1&gt;
+
+&lt;p&gt;Linux 文件操作都是调用 Linux 的系统调用完成的，虽然 &lt;code class=&quot;highlighter-rouge&quot;&gt;Python&lt;/code&gt; 、&lt;code class=&quot;highlighter-rouge&quot;&gt;java&lt;/code&gt; 等创建一个文件不会让显示让编程人员指定所创建的文件的权限，但是 Golang 需要，所以我们编程还是需要了解一点内核知识，比如网络编程涉及到 &lt;code class=&quot;highlighter-rouge&quot;&gt;I/O&lt;/code&gt;，而 Linux 下 I/O 有I/O 阻塞、I/O非阻塞、I/O复用、SIGIO 、异步I/O，而I/O复用中有 select / poll / epoll 等，上次面试被问到 epoll 时，闻所未闻，&lt;a href=&quot;https://tech.youzan.com/yi-bu-wang-luo-mo-xing/&quot;&gt;更多I/O讲解&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;现在找实习、找工作，发现公司会看重面试者是否有阅读源码等经验，因为我们不仅仅需要懂得调用别人的 API 完成某个功能，而且需要某个 API 底层到底完成了哪些操作，出了问题如何定位问题，以及如何解决问题。&lt;/p&gt;</content><author><name></name></author><summary type="html">问题描述</summary></entry><entry><title type="html">Golang 控制流</title><link href="http://localhost:4000/golang/2018/02/06/golang-controlflow.html" rel="alternate" type="text/html" title="Golang 控制流" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/06/golang-controlflow</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/06/golang-controlflow.html">&lt;h1 id=&quot;for---loop&quot;&gt;for - loop&lt;/h1&gt;
 
 &lt;p&gt;以下代码省略 condition statement 将会引起无限循环&lt;/p&gt;
 
@@ -97,7 +258,7 @@ default
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hello
 AAAA
 world
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">for - loop</summary></entry><entry><title type="html">Golang 并发基础</title><link href="http://g10guang.com/golang/2018/02/06/golang-concurrent.html" rel="alternate" type="text/html" title="Golang 并发基础" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/06/golang-concurrent</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/06/golang-concurrent.html">&lt;h1 id=&quot;goroutine&quot;&gt;goroutine&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">for - loop</summary></entry><entry><title type="html">Golang 并发基础</title><link href="http://localhost:4000/golang/2018/02/06/golang-concurrent.html" rel="alternate" type="text/html" title="Golang 并发基础" /><published>2018-02-06T09:00:05+08:00</published><updated>2018-02-06T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/06/golang-concurrent</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/06/golang-concurrent.html">&lt;h1 id=&quot;goroutine&quot;&gt;goroutine&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;A goroutine is a light weight thread managed by the Go runtime.&lt;/p&gt;
@@ -250,7 +411,7 @@ world
 
 &lt;p&gt;goroutine 不是 thread，每一个 goroutine 都拥有一个自己的调用栈。goroutine 开销很低，可以同时开启上千个 goroutine。&lt;/p&gt;
 
-&lt;p&gt;有可能一个 thread 中有上千个 goroutine。goroutine 多路动态复用 thread，也就是说真正执行计算的还是 thread，但是一个 thread 可能利用异步等技术来 concurrent 并发多个 goroutine 执行，并且减少切换 thread 上下文的成本&lt;/p&gt;</content><author><name></name></author><summary type="html">goroutine</summary></entry><entry><title type="html">Golang 常用命令</title><link href="http://g10guang.com/golang/2018/02/05/golang-flequenct-command.html" rel="alternate" type="text/html" title="Golang 常用命令" /><published>2018-02-05T09:00:05+08:00</published><updated>2018-02-05T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/05/golang-flequenct-command</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/05/golang-flequenct-command.html">&lt;h1 id=&quot;go-基本命令给&quot;&gt;go 基本命令给&lt;/h1&gt;
+&lt;p&gt;有可能一个 thread 中有上千个 goroutine。goroutine 多路动态复用 thread，也就是说真正执行计算的还是 thread，但是一个 thread 可能利用异步等技术来 concurrent 并发多个 goroutine 执行，并且减少切换 thread 上下文的成本&lt;/p&gt;</content><author><name></name></author><summary type="html">goroutine</summary></entry><entry><title type="html">Golang 常用命令</title><link href="http://localhost:4000/golang/2018/02/05/golang-flequenct-command.html" rel="alternate" type="text/html" title="Golang 常用命令" /><published>2018-02-05T09:00:05+08:00</published><updated>2018-02-05T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/05/golang-flequenct-command</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/05/golang-flequenct-command.html">&lt;h1 id=&quot;go-基本命令给&quot;&gt;go 基本命令给&lt;/h1&gt;
 
 &lt;h2 id=&quot;go-install&quot;&gt;go install&lt;/h2&gt;
 
@@ -447,7 +608,7 @@ go build
 
 &lt;h2 id=&quot;go-help-cmd&quot;&gt;go help cmd&lt;/h2&gt;
 
-&lt;p&gt;查看某条命令的帮助文档&lt;/p&gt;</content><author><name></name></author><summary type="html">go 基本命令给</summary></entry><entry><title type="html">Golang 反射</title><link href="http://g10guang.com/golang/2018/02/04/golang-reflect.html" rel="alternate" type="text/html" title="Golang 反射" /><published>2018-02-04T09:00:05+08:00</published><updated>2018-02-04T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/04/golang-reflect</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/04/golang-reflect.html">&lt;h1 id=&quot;反射&quot;&gt;反射&lt;/h1&gt;
+&lt;p&gt;查看某条命令的帮助文档&lt;/p&gt;</content><author><name></name></author><summary type="html">go 基本命令给</summary></entry><entry><title type="html">Golang 反射</title><link href="http://localhost:4000/golang/2018/02/04/golang-reflect.html" rel="alternate" type="text/html" title="Golang 反射" /><published>2018-02-04T09:00:05+08:00</published><updated>2018-02-04T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/04/golang-reflect</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/04/golang-reflect.html">&lt;h1 id=&quot;反射&quot;&gt;反射&lt;/h1&gt;
 
 &lt;p&gt;曾阅读&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;amp;mid=2650996069&amp;amp;idx=1&amp;amp;sn=63e7f5d5f91f9d84f1c3278426f6edf6&amp;amp;chksm=bdbf05368ac88c20c273f325acc257811d6ee7534df30ace674f5c7eeb0c7986984dca209131&amp;amp;scene=21#wechat_redirect&quot;&gt;今日头条中关于 Golang 优化&lt;/a&gt;的一篇文章，说尽可能不要用反射&lt;/p&gt;
 
@@ -603,7 +764,7 @@ go build
 {world 100}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;如果 Human 中的名字是小写 name，那么就会引发错误：&lt;code class=&quot;highlighter-rouge&quot;&gt;panic: reflect: reflect.Value.SetString using value obtained using unexported field&lt;/code&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">反射</summary></entry><entry><title type="html">Golang 更多类型</title><link href="http://g10guang.com/golang/2018/02/02/golang-moretype.html" rel="alternate" type="text/html" title="Golang 更多类型" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/02/golang-moretype</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/02/golang-moretype.html">&lt;h1 id=&quot;pointer&quot;&gt;Pointer&lt;/h1&gt;
+&lt;p&gt;如果 Human 中的名字是小写 name，那么就会引发错误：&lt;code class=&quot;highlighter-rouge&quot;&gt;panic: reflect: reflect.Value.SetString using value obtained using unexported field&lt;/code&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">反射</summary></entry><entry><title type="html">Golang 更多类型</title><link href="http://localhost:4000/golang/2018/02/02/golang-moretype.html" rel="alternate" type="text/html" title="Golang 更多类型" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/02/golang-moretype</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/02/golang-moretype.html">&lt;h1 id=&quot;pointer&quot;&gt;Pointer&lt;/h1&gt;
 
 &lt;p&gt;与 C 不一样，Go 中不支持关于指针的运算，比如 ptr ++ 等操作。&lt;/p&gt;
 
@@ -854,7 +1015,7 @@ go build
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;内层函数引用外层函数的变量，这样会促使外层变量被保存在内存中。&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)&quot;&gt;闭包维基百科&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Pointer</summary></entry><entry><title type="html">Golang 方法</title><link href="http://g10guang.com/golang/2018/02/02/golang-method.html" rel="alternate" type="text/html" title="Golang 方法" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/02/golang-method</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/02/golang-method.html">&lt;h1 id=&quot;method&quot;&gt;method&lt;/h1&gt;
+&lt;p&gt;内层函数引用外层函数的变量，这样会促使外层变量被保存在内存中。&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%97%AD%E5%8C%85_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)&quot;&gt;闭包维基百科&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Pointer</summary></entry><entry><title type="html">Golang 方法</title><link href="http://localhost:4000/golang/2018/02/02/golang-method.html" rel="alternate" type="text/html" title="Golang 方法" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/02/golang-method</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/02/golang-method.html">&lt;h1 id=&quot;method&quot;&gt;method&lt;/h1&gt;
 
 &lt;p&gt;method 不同于普通 fuction，method 有指定接受者的参数&lt;/p&gt;
 
@@ -1035,7 +1196,7 @@ go build
   &lt;li&gt;[]byte slice 用于承装读取的数据&lt;/li&gt;
   &lt;li&gt;n 表示该次读取，成功读取了多少个字节&lt;/li&gt;
   &lt;li&gt;err 如果已经到了流末尾，&lt;code class=&quot;highlighter-rouge&quot;&gt;err = io.EOF&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">method</summary></entry><entry><title type="html">Golang 基础</title><link href="http://g10guang.com/golang/2018/02/02/golang-basic.html" rel="alternate" type="text/html" title="Golang 基础" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/golang/2018/02/02/golang-basic</id><content type="html" xml:base="http://g10guang.com/golang/2018/02/02/golang-basic.html">&lt;h1 id=&quot;exported-name&quot;&gt;Exported Name&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">method</summary></entry><entry><title type="html">Golang 基础</title><link href="http://localhost:4000/golang/2018/02/02/golang-basic.html" rel="alternate" type="text/html" title="Golang 基础" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/02/golang-basic</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/02/golang-basic.html">&lt;h1 id=&quot;exported-name&quot;&gt;Exported Name&lt;/h1&gt;
 
 &lt;p&gt;在 package 中，有且只有以大写开头的变量、函数、类型会被外面所访问&lt;/p&gt;
 
@@ -1142,7 +1303,7 @@ complex64 complex128
 
 &lt;p&gt;new(T) 创建某个地址空间，返回对应的地址，然后将属性初始化为 zero value&lt;/p&gt;
 
-&lt;p&gt;make() 创建 slice / map / chan，并且完成对该类型的初始化，返回的是引用&lt;/p&gt;</content><author><name></name></author><summary type="html">Exported Name</summary></entry><entry><title type="html">《黑旗：ISIS的崛起》读后感</title><link href="http://g10guang.com/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html" rel="alternate" type="text/html" title="《黑旗：ISIS的崛起》读后感" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://g10guang.com/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read</id><content type="html" xml:base="http://g10guang.com/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html">&lt;p&gt;如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。&lt;/p&gt;
+&lt;p&gt;make() 创建 slice / map / chan，并且完成对该类型的初始化，返回的是引用&lt;/p&gt;</content><author><name></name></author><summary type="html">Exported Name</summary></entry><entry><title type="html">《黑旗：ISIS的崛起》读后感</title><link href="http://localhost:4000/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html" rel="alternate" type="text/html" title="《黑旗：ISIS的崛起》读后感" /><published>2018-02-02T09:00:05+08:00</published><updated>2018-02-02T09:00:05+08:00</updated><id>http://localhost:4000/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read</id><content type="html" xml:base="http://localhost:4000/%E8%AF%BB%E4%B9%A6%E5%BF%83%E5%BE%97/2018/02/02/ISIS-after-read.html">&lt;p&gt;如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。&lt;/p&gt;
 
 &lt;p&gt;我是从比尔盖茨微信公众号中了解到有该书籍的存在的，能够引起我的兴趣的就是一个恐怖组织的头目–扎卡维是如何具有如此巨大的魅力能够让人们跟随他从事各种恐怖袭击，甚至是自杀式恐怖行为。&lt;/p&gt;
 
@@ -1204,7 +1365,7 @@ complex64 complex128
 
 &lt;p&gt;上述这么多的恐怖行为大部分都是借助了极端宗教的力量而达到的，无论是“圣战”的号召还是“上天堂，下地狱”的承诺。在&lt;strong&gt;《人类简史》&lt;/strong&gt;和&lt;strong&gt;《未来简史》&lt;/strong&gt;中都极大地强调了宗教的作用，宗教一开始的存在是为了解释某个当时人们还无法的解释的现象，或者帮助人们克服内心的恐惧。人类发展了这么旧，几乎每个民族都有各自的信仰，其中数基督教、伊斯兰教、佛教比较普遍，但是随着知识的发展，人类能够利用已有的知识去解释各种现象，而不是借助宗教去讲故事，我们年青一代似乎也没有如此宗教信仰，那么未来宗教会如何发展？未来的人会遗忘宗教吗？&lt;/p&gt;
 
-&lt;p&gt;待未来有空阅读《未来简史》或许能够得到答案，其作者是以色列著名的历史学家、宗教学家赫拉利。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。</summary></entry><entry><title type="html">开发软件和小脚本的区别</title><link href="http://g10guang.com/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html" rel="alternate" type="text/html" title="开发软件和小脚本的区别" /><published>2018-01-20T09:00:05+08:00</published><updated>2018-01-20T09:00:05+08:00</updated><id>http://g10guang.com/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB</id><content type="html" xml:base="http://g10guang.com/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html">&lt;p&gt;近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，&lt;a href=&quot;https://github.com/g10guang/WHUT_Courses_System&quot;&gt;Github仓库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;待未来有空阅读《未来简史》或许能够得到答案，其作者是以色列著名的历史学家、宗教学家赫拉利。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。</summary></entry><entry><title type="html">开发软件和小脚本的区别</title><link href="http://localhost:4000/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html" rel="alternate" type="text/html" title="开发软件和小脚本的区别" /><published>2018-01-20T09:00:05+08:00</published><updated>2018-01-20T09:00:05+08:00</updated><id>http://localhost:4000/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB</id><content type="html" xml:base="http://localhost:4000/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html">&lt;p&gt;近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，&lt;a href=&quot;https://github.com/g10guang/WHUT_Courses_System&quot;&gt;Github仓库&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;以下是本文的小定义：&lt;/strong&gt;&lt;/p&gt;
 
@@ -1235,114 +1396,4 @@ complex64 complex128
 
 &lt;p&gt;之前老师上课说真正项目中有一大半代码都是防御型代码，为了保证代码的鲁棒性。&lt;/p&gt;
 
-&lt;p&gt;如果这个世界每个人都那么遵守规则，这个社会做锁的成本会低了多少。&lt;/p&gt;</content><author><name></name></author><summary type="html">近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，Github仓库</summary></entry><entry><title type="html">面试斗鱼后端工程师后感</title><link href="http://g10guang.com/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC.html" rel="alternate" type="text/html" title="面试斗鱼后端工程师后感" /><published>2017-12-01T09:00:05+08:00</published><updated>2017-12-01T09:00:05+08:00</updated><id>http://g10guang.com/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC</id><content type="html" xml:base="http://g10guang.com/%E9%9D%A2%E7%BB%8F/2017/12/01/%E9%9D%A2%E8%AF%95%E6%96%97%E9%B1%BC.html">&lt;p&gt;前两天去了面试ofo的后端工程师，被吊打，具体经历可以查看&lt;a href=&quot;https://zhuanlan.zhihu.com/p/30449067&quot;&gt;《面试ofo后端工程师后感》&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;昨天我参加了斗鱼的校园招聘笔试以及面试，从下午一点半一直战斗到晚上的六点半，特别是面试过程中，对精神消耗很大，一个会议室狭小、密闭的空间里，一直进行面试。技术一面、技术二面、三面（我不确定第三面是否是HR可能更加倾向于技术团队的管理）、HR四面。&lt;/p&gt;
-
-&lt;h1 id=&quot;笔试&quot;&gt;笔试&lt;/h1&gt;
-
-&lt;p&gt;HR给每一个人相应的笔试题，前端、PHP后端、Golang后端、Java后端、产品经理、数据分析等等。我应聘的是Java后端，前几道题目主要是关于 Java 语言的基础（&lt;a href=&quot;http://www.importnew.com/12399.html&quot;&gt;接口与抽象类的区别&lt;/a&gt;、抽象类与普通类的区别，&lt;a href=&quot;http://www.importnew.com/22405.html&quot;&gt;创建对象的方式&lt;/a&gt;，多线程，&lt;a href=&quot;http://www.runoob.com/java/java-basic-datatypes.html&quot;&gt;基础类型&lt;/a&gt;以及对应封装类）、MySQL 的表操作（同时使用 JOIN ON / &lt;a href=&quot;http://www.mysqltutorial.org/mysql-case-function/&quot;&gt;CASE WHEN&lt;/a&gt; / GROUP BY / WHERE / SELECT 等操作）、前端 JS 响应 select 下拉条代码、字符串操作、排序去重算法。&lt;/p&gt;
-
-&lt;p&gt;其中 MySQL 题目如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;有 A 表，其中记录着每个学生的每一科目的成绩（name、score、subject）；&lt;/li&gt;
-  &lt;li&gt;有 B 表，其中记录着每个科目占总成绩比例（subject、percent）；&lt;/li&gt;
-  &lt;li&gt;求在 0~59、60~89、90~100的学生比例&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;对应的 SQL 查询语句：&lt;/p&gt;
-
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;CASE&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stuScores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BETWEEN&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;59&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t059&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;CASE&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stuScores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BETWEEN&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;89&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to89&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;CASE&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;WHEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stuScores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BETWEEN&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;THEN&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;ELSE&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to100&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;percent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;GROUP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stuScores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;没有了解过 JS 对于前端的响应事件，没有写出代码，只留下一句声明：&lt;strong&gt;不了解 JavaScript&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;对字符串的对称翻转（”01234567” 转化为 “32107654”），Java 中 String 对象是不可改变的，所以每次修改 String 中的内容，都会重新创建一个新的 String 对象，所以这条题目我猜面试官想要看到的是把 String 转化为 char[] 进行操作。&lt;/p&gt;
-
-&lt;p&gt;最后一题，把随机序列排序并去重，[1, 3, 4, 2, 3, 4] 转化为 [1, 2, 3, 4]，最后还要求算出时间以及空间复杂度。我的想法是使用平衡二叉树进行排序，在排序的过程中将去重操作一并完成，无奈忘记了平衡二叉树的调整算法。&lt;/p&gt;
-
-&lt;p&gt;使用平衡二叉树算法时间空间复杂度：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;时间复杂度 = O(nlog(n))
-空间复杂度 = O(n)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;还可以对数组先使用快速排序等算法，然后再开创另一个新的数组，从头到尾一个一个插到新的数组，记录上一个插入的数字，如果下次要插入的数字等于上一次插入的数字就放弃，否则就插入到新的数组里面。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;时间复杂度 = O(nlog(n))
-空间复杂度 = O(n)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;技术一面&quot;&gt;技术一面&lt;/h1&gt;
-
-&lt;p&gt;面试官在看我简历的时候，顺带让我也进行自我介绍。部分问题我忘了，他问了我大概这么几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MySQL 有哪些数据引擎以及谈谈他们的区别、应用场景。&lt;a href=&quot;https://segmentfault.com/a/1190000008227211&quot;&gt;Innodb 和 MyISAM 的区别&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;MySQL 有哪些数据类型。&lt;a href=&quot;https://dev.mysql.com/doc/refman/5.7/en/char.html&quot;&gt;char 和 varchar 区别&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;谈谈&lt;a href=&quot;https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E5%8D%8F%E8%AE%AE&quot;&gt;7层网络协议&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/youxiansanren/article/details/52435239&quot;&gt;TCP三次握手，四次分手&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;GitHub 上除了简历上写的两个项目，还有没有其他项目。&lt;a href=&quot;https://github.com/g10guang&quot;&gt;我的 Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;做项目选择的技术的原因，如为什么在博客中选择 MongoDB 而不是 MySQL 等&lt;/li&gt;
-  &lt;li&gt;HTTP 状态码，4xx 和 5xx 大家都很熟悉，他提到了部分 3xx，比如 &lt;a href=&quot;http://veryyoung.me/blog/2015/08/24/difference-between-301-and-302.html&quot;&gt;301 和 302 的区别&lt;/a&gt;，正确地使用 3xx 可以控制缓存以及搜索引擎优化 SEO&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;面试官面试我的时候，其实很多问题我都了解过，但是没有深入了解过，回答的时候感觉底气也不是很足。&lt;/p&gt;
-
-&lt;h1 id=&quot;技术二面&quot;&gt;技术二面&lt;/h1&gt;
-
-&lt;p&gt;同样的套路，在看简历的时候让我进行自我介绍。&lt;/p&gt;
-
-&lt;p&gt;二面中，面试官问了很多我简历写的项目上的一些技术细节（实现的模式、原理），比如电商平台的&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;amp;mid=2651959391&amp;amp;idx=1&amp;amp;sn=fb28fd5e5f0895ddb167406d8a735548&amp;amp;scene=21#wechat_redirect&quot;&gt;抢购功能&lt;/a&gt;、博客评论中的楼中楼、如何确保数据安全同步以及更多的实现业务逻辑的思路。&lt;/p&gt;
-
-&lt;p&gt;他的问题，没有问到技术的细节，而是其中的道理，大概是大道至简，只要把其中的原理弄清楚了，那么将思路方法通过其他编程语言或者框架的难度不大。我仍然记得，ofo面试管对我说的，如果公司只要招一个对语言或者框架熟悉的人才，那么花几个月对新员工进行培训就可以做到，更加重要的是扎实的技术知识，基础不扎实会成为个人成长的瓶颈。个人感觉确实是这样的，我从 Java Web 往 Python Web 转，只在两个星期就上手了，成本相对低。&lt;/p&gt;
-
-&lt;p&gt;在面试中，我主动问了一些关于笔试题的一些答案，或者面试官认为有没有更优的实现方案。比如上述 CASE WHEN 的解法就是他教我的，数组的排序并去重也给出了他的意见。针对 SQL 我还提问了真正项目开发中，会不会写存储过程等 SQL 编程。他给出公司中的 DBA 不建议写存储过程，因为这样会将业务逻辑往 DB 转，不仅增加数据库压力，而且会在业务逻辑改变时需要更新多个 DB 的存储过程，成本很高，而且可维护性低。&lt;/p&gt;
-
-&lt;p&gt;因为斗鱼公司在高峰时，有上千万人同时在线观看斗鱼视频，我对他们的高并发处理很感兴趣，咨询他们的技术解决方案。他列举了很多 CDN 缓存、&lt;a href=&quot;https://www.zhihu.com/question/24723688&quot;&gt;反向代理&lt;/a&gt;、浏览器端缓存、分布式等，还有列举一个曾经使用 PHP 无法解决的性能问题，转到 Golang 就很好地解决了性能问题。现在确实很多互联网方面的公司在往 Golang 转，&lt;a href=&quot;https://medium.com/@kevalpatel2106/why-should-you-learn-go-f607681fad65&quot;&gt;Why Golang&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;既然抛出了 PHP（脚本语言）和 Golang（编译语言），我就问面试官在脚本语言和编译语言中的选择问题，他给我的答案是公司鼓励多语言发展，语言只是实现工具，不要被语言局限了视野，只要打好基础，学习一门新语言是很轻松的，具体开发中要根据具体情况选择合适的语言。&lt;/p&gt;
-
-&lt;p&gt;PS：面试官没有问技术细节一部分原因很可能是我简历上写的项目都是用 Java Python 方面技术写的，而面试官是主要从事 PHP 开发的。&lt;/p&gt;
-
-&lt;h1 id=&quot;三面--hr-四面&quot;&gt;三面 + HR 四面&lt;/h1&gt;
-
-&lt;p&gt;我不确定三面是从事什么的，进行车轮战，这时候我的头脑已经不是很清楚了，他进门的时候对他自己进行了简短的自我介绍，但是我没有听清楚，我也尝试过看他的工牌，但是看不清楚。&lt;/p&gt;
-
-&lt;p&gt;面试官一开始坐下来，跟我聊了聊技术、项目方面的问题，他说进来之前，看过&lt;a href=&quot;https://whoyoung.me/&quot;&gt;我的博客&lt;/a&gt;，说我的博客是自己搭建的，而不是使用第三方平台或者是使用开源模板搭建的，然后就对我的博客产生了兴趣，比如对博客会不会进行再开发之类的深入问了几个问题，我提到了未来可能添加一个资源聚合功能，从知乎等爬取优质网站，放到我们博客上。他跟着问了一些爬虫的是否合法以及数据安全等问题，问我有没有对自己博客采取反爬虫等机制。接着他问了我平时使用的操作系统，以及有没有使用阿里云等云服务器（我PC使用 &lt;a href=&quot;https://linuxmint.com/&quot;&gt;Linux Mint&lt;/a&gt;，在腾讯云购买了两个云服务器，学生优惠很大，建议计算机类大学生去申请资源）。&lt;/p&gt;
-
-&lt;p&gt;接着他跟我聊了聊公司内的氛围、团建活动、健身器材等，描述斗鱼公司在光谷人均消费500RMB下的都尝了一遍，我更关心健身器材，因为我有保持健身，失望的是，他们居然没有举重等无氧运动设备，但他补充说，斗鱼正在建立自己的园区（4年不到建立园区，可见斗鱼发展之快），斗鱼很快会有更加健全的健身设施。而且看得出他很喜欢现在的工作，对公司的价值观很认同，表示自己与公司正在同步成长，可见在认同的公司中工作是多么重要的，表示斗鱼公司有很多内部分享和参加技术峰会，让内部员工有更多的机会学习成长。&lt;/p&gt;
-
-&lt;p&gt;他表示除了技术方面，还要多了解点其他东西，多学点东西，对技术要有热情、专研精神。和他还是聊得很愉快的，而且他也很友善，问我职业发展规划怎样的，而且给出了他的建议。他也问了有关我毕业设计等问题。&lt;/p&gt;
-
-&lt;p&gt;HR四面，没有聊太多东西，可能更多的是了解个人性格等，她也要求我对个人进行简短的介绍（非技术方面，更多的是学习状态和性格），谈谈我对斗鱼公司的了解。令我惊讶的是，她也和我谈项目，问我最愿意拿出来和她分享的是哪一个项目之类的问题。谈了没多久，时间确实已经很晚了，她让我先回去等电话通知。&lt;/p&gt;
-
-&lt;h1 id=&quot;总结&quot;&gt;总结&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;不要把自己不熟悉的内容写到简历上，不要不懂装懂，否则面试官可能针对它不断发问&lt;/li&gt;
-  &lt;li&gt;需要通过自我介绍和简历引导面试官往自己熟悉的方面发问&lt;/li&gt;
-  &lt;li&gt;需要打好基本功，数据结构与算法、操作系统、网络协议以及所使用技术&lt;/li&gt;
-  &lt;li&gt;面试前需要对公司有一个大概了解，比如公司产品、服务以及技术&lt;/li&gt;
-  &lt;li&gt;敢于问为什么，在面试结束前，可以请面试官解答一些问题&lt;/li&gt;
-  &lt;li&gt;平时学习要把其中的“道”弄清楚&lt;/li&gt;
-  &lt;li&gt;最好有一两个项目可以让面试官发问，不然面试官自由发挥，后果自负&lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">前两天去了面试ofo的后端工程师，被吊打，具体经历可以查看《面试ofo后端工程师后感》。</summary></entry></feed>
+&lt;p&gt;如果这个世界每个人都那么遵守规则，这个社会做锁的成本会低了多少。&lt;/p&gt;</content><author><name></name></author><summary type="html">近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，Github仓库</summary></entry></feed>
