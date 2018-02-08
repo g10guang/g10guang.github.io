@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-08T14:35:26+08:00</updated><id>http://localhost:4000/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang 创建文件权限问题</title><link href="http://localhost:4000/golang/2018/02/08/golang-make-dir-problem.html" rel="alternate" type="text/html" title="Golang 创建文件权限问题" /><published>2018-02-08T09:00:05+08:00</published><updated>2018-02-08T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/08/golang-make-dir-problem</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/08/golang-make-dir-problem.html">&lt;h1 id=&quot;问题描述&quot;&gt;问题描述&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-08T23:10:52+08:00</updated><id>http://localhost:4000/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">阿里巴巴实习生面试后感</title><link href="http://localhost:4000/%E9%9D%A2%E7%BB%8F/2018/02/08/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%E5%90%8E%E6%84%9F.html" rel="alternate" type="text/html" title="阿里巴巴实习生面试后感" /><published>2018-02-08T21:00:05+08:00</published><updated>2018-02-08T21:00:05+08:00</updated><id>http://localhost:4000/%E9%9D%A2%E7%BB%8F/2018/02/08/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%E5%90%8E%E6%84%9F</id><content type="html" xml:base="http://localhost:4000/%E9%9D%A2%E7%BB%8F/2018/02/08/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%9D%A2%E8%AF%95%E5%90%8E%E6%84%9F.html">&lt;h1 id=&quot;机会&quot;&gt;机会&lt;/h1&gt;
+
+&lt;p&gt;得益在阿里工作的师姐内推机会，不用笔试，直接进入面试，面试阿里-淘宝技术的工程师。美中不足的是内推的岗位是测试工程师，但是我还是想从事 web 后端的研发的，但是对方是阿里-淘宝，测试就测试吧，在阿里测试肯定也学到很多东西。&lt;/p&gt;
+
+&lt;p&gt;今天下午接到电话约今晚 8 点电话面试……&lt;/p&gt;
+
+&lt;p&gt;捉紧时间补补，对着简历猜测：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;我应该怎么介绍我自己和做过的项目&lt;/li&gt;
+  &lt;li&gt;面试官会问什么问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;过程&quot;&gt;过程&lt;/h1&gt;
+
+&lt;p&gt;这个古老又神圣的问题，之前面试过几次，说是能说点什么东西，但是说实话自身没有什么亮点，没法打动人。&lt;/p&gt;
+
+&lt;p&gt;然后找一个最乐意的项目出来分享，很后悔找了一个自己第一次做外包的项目，这个项目确实让我学到了很多东西，但是含金量确实是很低。&lt;/p&gt;
+
+&lt;p&gt;当他问到我遇到了哪些技术问题，以及解决方案的时候我就知道部应该说这个项目，这个项目虽然遇到了很多问题，但是都是因为是 Green hand 的原因，说出来会显得我太菜了。但是做了一个错误的选择，得硬着头皮继续下去。&lt;/p&gt;
+
+&lt;p&gt;就其中一个问题，我说第一次做外包的时候没有了解到很多架构的知识，没有合适地使用到缓存，所有的请求都下放到 DB，那么他问我有没有想到其他方案可以解决这个问题？&lt;/p&gt;
+
+&lt;p&gt;我当然不傻，知道有 redis、memcache 做缓存。&lt;/p&gt;
+
+&lt;p&gt;后来他问我是否知道 Hibernate 可以做二级缓存，单机情况下 Hibernate 做缓存已经足够了。（PS：单机意味着不会有太大的访问量）&lt;/p&gt;
+
+&lt;p&gt;他一直顺着问到，问除了 Hibernate 我还有没有用到其他的 ORM，而他们之间有什么区别？&lt;/p&gt;
+
+&lt;p&gt;除了 Hibernate 我就了解过 MyBatis 了，而两者对比我感觉就是 Hibernate 有自己的规范，JPA 接口等，对于开发来说更加规范，MyBastis 需要管理大量的 SQL 语句，多了以后不好管理，但是 SQL 能够解决的问题，MyBatis 实现起来都很方便，但是有可能会使得项目更加凌乱。我确实对 Hibernate 不熟悉，也不能够说出什么来，平时开发时候也就是照葫芦画瓢，具体如何优化，配置文件为什么这么写之类的一概不了解。&lt;/p&gt;
+
+&lt;p&gt;此刻，我深刻感受到如果找工作，最好深入了解某一技术，比如经典的 java 的内存模型等，这样虽然在一般开发中用不到这么高深的知识，即使用到也可以通过临时 Google 解决问题，但是如果在公司做大项目，技术方面遇到了不是随便 Google 就能解决的问题的时候，就很考技术深度。而且如果深入了解某一个领域，和面试官能够一步一步深入，聊得很 high，因为我感觉面试一般也就根据一两个方向深入问。&lt;/p&gt;
+
+&lt;p&gt;当我提到我其实有大半年不写 java，现在主要搞 Python 和 Golang 的时候（当然这可能会显得自己不务正业，亦或者在面试官看来这小伙子还挺有活力），他就问我如果学习这两个有没有想过找工作难问题，可能公司里面主流还是 java 、C系列吧。&lt;/p&gt;
+
+&lt;p&gt;我当然回答说，我秋招的时候留意过就业市场，ofo 和斗鱼都有招募 Golang 的，而且 Python 是目前很热门的脚本语言，很多公司招聘要求都是要求应聘者熟悉一门脚本语言。而且现在公司不是流行 DevOps 吗？Python 在运维方面也很有帮助啊。&lt;/p&gt;
+
+&lt;p&gt;一开始的时候，我提到其实我更想应聘研发岗位，我面试的是测试岗位。这时，其实我已经感觉凉了，因为面试我的是测试工程师，他怎么可能能够决定我能够去研发部门实习呢？或者有奇迹呢，Who knows.&lt;/p&gt;
+
+&lt;p&gt;他最后问了我熟悉 Python 的内存模型不？&lt;/p&gt;
+
+&lt;p&gt;从实，我不了解，java 内存模型是一个很经典的问题，但是 Python 我确实不够了解它的底层，虽然我用它已经很溜了，但对 Python 底层不是很了解，读的书还是少啊！！！&lt;/p&gt;
+
+&lt;p&gt;最后给了我一个 Python 题目：如何有序去重输出 list 中的元素？&lt;/p&gt;
+
+&lt;p&gt;我就应该想到这是一个考语言的题目，但我太天真，给出了两个答案都跟语言无关：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;排序&lt;/li&gt;
+  &lt;li&gt;Hash Set&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但是最后他提示 Python 有一个内置函数可以实现这个供能，可惜我实在没想到，因为平时写算法太少，即使最近写算法的时候也自己造轮子，没有使用内置函数。至今没有找到 list 中有函数可以实现这个功能，遗憾。&lt;/p&gt;
+
+&lt;h1 id=&quot;总结&quot;&gt;总结&lt;/h1&gt;
+
+&lt;p&gt;我以为会问道算法题的，我最近在刷算法题目，可是没有，可能对实习生要求没那么高吧。&lt;/p&gt;
+
+&lt;p&gt;Anyway，面试官很 nice，最后我问他问题的时候，我请求他给我一点学习发展上的建议。他说，最好找和自己方向匹配的，比如我想学习 Python 和 Golang 就最好找一个公司是使用 Python 和 Golang的实习，这样我成长也比较快。（我知道已经凉了）&lt;/p&gt;
+
+&lt;p&gt;其实我更加想知道对于框架、语言底层（我很不熟悉），他会给我什么建议。&lt;/p&gt;
+
+&lt;p&gt;我认为在面试前一定要好好地审视自己的项目经历，找出其中一个能够拿得出手，自己也最熟悉的项目出来和面试官分享，在多次磨炼之后，这个项目一定会越来越熟练，回答得越来越得心应手。&lt;/p&gt;</content><author><name></name></author><summary type="html">机会</summary></entry><entry><title type="html">Golang 创建文件权限问题</title><link href="http://localhost:4000/golang/2018/02/08/golang-make-dir-problem.html" rel="alternate" type="text/html" title="Golang 创建文件权限问题" /><published>2018-02-08T09:00:05+08:00</published><updated>2018-02-08T09:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/08/golang-make-dir-problem</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/08/golang-make-dir-problem.html">&lt;h1 id=&quot;问题描述&quot;&gt;问题描述&lt;/h1&gt;
 
 &lt;p&gt;今天学习 Golang 文件操作实践时，当我创建一个文件（夹）出现文件权限与我代码设置不一致的问题&lt;/p&gt;
 
@@ -53,10 +113,13 @@
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; 不具有该权限&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rwx&lt;/code&gt; ==&amp;gt; 111
-&lt;code class=&quot;highlighter-rouge&quot;&gt;rw-&lt;/code&gt; ==&amp;gt; 110
-&lt;code class=&quot;highlighter-rouge&quot;&gt;r--&lt;/code&gt; ==&amp;gt; 100
-&lt;code class=&quot;highlighter-rouge&quot;&gt;---&lt;/code&gt; ==&amp;gt; 000&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rwx&lt;/code&gt; ==&amp;gt; 111&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rw-&lt;/code&gt; ==&amp;gt; 110&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;r--&lt;/code&gt; ==&amp;gt; 100&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;---&lt;/code&gt; ==&amp;gt; 000&lt;/p&gt;
 
 &lt;p&gt;如权限 &lt;code class=&quot;highlighter-rouge&quot;&gt;-rwxrw-r--&lt;/code&gt; 表示这是一个文件，文件所有者拥有读写执行权限、同组用户有读写权限、其他用户只有读权限&lt;/p&gt;
 
@@ -1365,35 +1428,4 @@ complex64 complex128
 
 &lt;p&gt;上述这么多的恐怖行为大部分都是借助了极端宗教的力量而达到的，无论是“圣战”的号召还是“上天堂，下地狱”的承诺。在&lt;strong&gt;《人类简史》&lt;/strong&gt;和&lt;strong&gt;《未来简史》&lt;/strong&gt;中都极大地强调了宗教的作用，宗教一开始的存在是为了解释某个当时人们还无法的解释的现象，或者帮助人们克服内心的恐惧。人类发展了这么旧，几乎每个民族都有各自的信仰，其中数基督教、伊斯兰教、佛教比较普遍，但是随着知识的发展，人类能够利用已有的知识去解释各种现象，而不是借助宗教去讲故事，我们年青一代似乎也没有如此宗教信仰，那么未来宗教会如何发展？未来的人会遗忘宗教吗？&lt;/p&gt;
 
-&lt;p&gt;待未来有空阅读《未来简史》或许能够得到答案，其作者是以色列著名的历史学家、宗教学家赫拉利。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。</summary></entry><entry><title type="html">开发软件和小脚本的区别</title><link href="http://localhost:4000/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html" rel="alternate" type="text/html" title="开发软件和小脚本的区别" /><published>2018-01-20T09:00:05+08:00</published><updated>2018-01-20T09:00:05+08:00</updated><id>http://localhost:4000/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB</id><content type="html" xml:base="http://localhost:4000/%E5%BF%83%E5%BE%97/2018/01/20/%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E5%92%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB.html">&lt;p&gt;近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，&lt;a href=&quot;https://github.com/g10guang/WHUT_Courses_System&quot;&gt;Github仓库&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;以下是本文的小定义：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;小脚本：容错性很差，是给专门人使用的，需要使用人对脚本逻辑有一定了解，比如Python脚本&lt;/li&gt;
-  &lt;li&gt;软件：开放给大众使用，需要提供好的 UI，需要很好的容错性，需要反馈给用户信息&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果只是供笔者用于的小脚本，完成抢课逻辑并不需要多少的代码量，可能几个小时分析问题，写几十行小脚本就完事了。但是我萌生了一个开发一个帮助同学抢课的软件，免得同学在抢课时分候着电脑、手机、平板点点点，最后却什么都没得到。&lt;/p&gt;
-
-&lt;p&gt;项目中需要爬取选课系统中的信息，就需要用到了爬虫，于是我屁颠屁颠地邀请懂爬虫的友人参与我的开发中。&lt;/p&gt;
-
-&lt;p&gt;我是平常研究的后端开发比较多，但是软件需要提供用户 UI，于是我匆匆忙忙地学习了TkInter的基本用法，随机开始了设计UI，由于不熟悉，开发过程也是不断地Google。很快用户界面开发得差不多了，但是由于Python的GIL存在的，为了提供用户体验，不让界面一卡一卡的，我又去研究了Python的多进程以及多线程（PS：采用的思路是抢课任务分配到新进程中进行，而且每添加一个新的任务就创建新的线程去执行）&lt;/p&gt;
-
-&lt;p&gt;其后爬虫的第一个方案似乎出了点问题，而且使用了Scrapy对于本项目有点笨重，笔者后面就去学了 requests+BeautifulSoup 作为简单的爬虫，去爬取特定的信息，requests模拟登陆拿到响应的html页面，BeautifulSoup 解析页面提取相关信息。&lt;/p&gt;
-
-&lt;p&gt;由于学校选课网站是外包项目，html写得非常凌乱（还有注释&lt;del&gt;），每个选课的表格还不一样，还要为专门为某个选课做特殊处理。（可能这就是选课系统的防爬虫的措施吧&lt;/del&gt;）&lt;/p&gt;
-
-&lt;p&gt;幸好，requests与BeatifulSoup都提供了良好的文档和API，整个爬虫开发从学习到完成也就是花了两天时间而已。但是依然无法做到百分百的覆盖，我只能说爬虫在非抢课期间能够成功执行，但是如果在真正抢课期间，选课系统随时宕机，爬虫也就无法保证一定能正确无误地抓去数据。&lt;/p&gt;
-
-&lt;p&gt;怎么样能够提升用于体验，提供用户真正需要的功能，这确实是需要大量的思考。这也就是为什么腾讯、知乎等企业招聘员工要求应聘者需要有产品sense。&lt;/p&gt;
-
-&lt;p&gt;整个过程下来，感觉开发一个给予大众使用的软件成本非常高，怪不得web中要强调前后端分离，这样才能够做到前端能够注重用户体验，后端能够专注业务逻辑。整个团队的开发效率才会有所提升，术业有专攻，也不需要有那么一群人每个人都精通所有，（即使是前端也有专注与写JS逻辑、CSS样式）但付出的就是沟通成本。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;最后思考：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;一个网站防爬虫是多么重要，之前看朋友爬美团、携程的数据非常有趣，真实显示的数据与HTML中的数据相差是非常大的，他们之间有一些转换规则，或者是显示的价格是从图片中一个一个数字扣下来的，用心良苦，这给爬虫爬取有用的信息带来了很大的难度。有兴趣的朋友可以去尝试一下。&lt;/p&gt;
-
-&lt;p&gt;之前老师上课说真正项目中有一大半代码都是防御型代码，为了保证代码的鲁棒性。&lt;/p&gt;
-
-&lt;p&gt;如果这个世界每个人都那么遵守规则，这个社会做锁的成本会低了多少。&lt;/p&gt;</content><author><name></name></author><summary type="html">近日开发了一个武汉理工大学抢课软件，断断续续开发该软件花了不少时间，Github仓库</summary></entry></feed>
+&lt;p&gt;待未来有空阅读《未来简史》或许能够得到答案，其作者是以色列著名的历史学家、宗教学家赫拉利。&lt;/p&gt;</content><author><name></name></author><summary type="html">如果这个世界上不是存在一个叫做ISIS的组织，那么我肯定以为该书所描述的只是虚构的故事，一切就像美国或者香港的犯罪电影，中央情报局、各国领袖、武器、间谍等等。</summary></entry></feed>
