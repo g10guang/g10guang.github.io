@@ -118,7 +118,7 @@
 
 <p>(1) 操作不会对 (2) 操作进行任何影响，即使 (2) 操作可能对 (1) 操作有影响，也不需要保证 (1) 操作一定在 (2) 操作之前完成，因为可以使用寄存器作为临时存储。也就是想说的，(1) dose not happen before (2)</p>
 
-<p>happens before 指代事件 <em>e1</em> <em>e2</em> 存在某些影响，需要保证 <em>e1</em> <em>e1</em> 之间的开始和完成需要有一定的逻辑关系。</p>
+<p>happens before 指代事件 <em>e1</em> <em>e2</em> 存在某些影响，需要保证 <em>e1</em> <em>e2</em> 之间的开始和完成需要有一定的逻辑关系。</p>
 
 <p>happens before 指的不是时序上的关系，描述的是一个写操作<em>w</em>对变量<em>v</em>的修改能够被读操作<em>r</em>感知到，那么<em>w</em> happens befoer <em>r</em></p>
 
@@ -375,7 +375,7 @@ BOOM!
   <li><code class="highlighter-rouge">select{}</code> 会阻塞当前 goroutine，cpu 使用率将近 0%</li>
 </ul>
 
-<p>参考：</p>
+<h1 id="参考">参考：</h1>
 
 <p><a href="https://tiancaiamao.gitbooks.io/go-internals/content/zh/01.3.html">Golang 内存模型</a></p>
 

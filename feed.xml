@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-15T10:10:18+08:00</updated><id>http://localhost:4000/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang happens before</title><link href="http://localhost:4000/golang/2018/02/13/golang-channel.html" rel="alternate" type="text/html" title="Golang happens before" /><published>2018-02-13T21:00:05+08:00</published><updated>2018-02-13T21:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/13/golang-channel</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/13/golang-channel.html">&lt;h1 id=&quot;happens-before&quot;&gt;happens before&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-15T10:27:54+08:00</updated><id>http://localhost:4000/</id><title type="html">刘曦光</title><subtitle>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</subtitle><entry><title type="html">Golang happens before</title><link href="http://localhost:4000/golang/2018/02/13/golang-channel.html" rel="alternate" type="text/html" title="Golang happens before" /><published>2018-02-13T21:00:05+08:00</published><updated>2018-02-13T21:00:05+08:00</updated><id>http://localhost:4000/golang/2018/02/13/golang-channel</id><content type="html" xml:base="http://localhost:4000/golang/2018/02/13/golang-channel.html">&lt;h1 id=&quot;happens-before&quot;&gt;happens before&lt;/h1&gt;
 
 &lt;p&gt;&lt;strong&gt;什么是 happens before？&lt;/strong&gt;&lt;/p&gt;
 
@@ -26,7 +26,7 @@
 
 &lt;p&gt;(1) 操作不会对 (2) 操作进行任何影响，即使 (2) 操作可能对 (1) 操作有影响，也不需要保证 (1) 操作一定在 (2) 操作之前完成，因为可以使用寄存器作为临时存储。也就是想说的，(1) dose not happen before (2)&lt;/p&gt;
 
-&lt;p&gt;happens before 指代事件 &lt;em&gt;e1&lt;/em&gt; &lt;em&gt;e2&lt;/em&gt; 存在某些影响，需要保证 &lt;em&gt;e1&lt;/em&gt; &lt;em&gt;e1&lt;/em&gt; 之间的开始和完成需要有一定的逻辑关系。&lt;/p&gt;
+&lt;p&gt;happens before 指代事件 &lt;em&gt;e1&lt;/em&gt; &lt;em&gt;e2&lt;/em&gt; 存在某些影响，需要保证 &lt;em&gt;e1&lt;/em&gt; &lt;em&gt;e2&lt;/em&gt; 之间的开始和完成需要有一定的逻辑关系。&lt;/p&gt;
 
 &lt;p&gt;happens before 指的不是时序上的关系，描述的是一个写操作&lt;em&gt;w&lt;/em&gt;对变量&lt;em&gt;v&lt;/em&gt;的修改能够被读操作&lt;em&gt;r&lt;/em&gt;感知到，那么&lt;em&gt;w&lt;/em&gt; happens befoer &lt;em&gt;r&lt;/em&gt;&lt;/p&gt;
 
@@ -283,7 +283,7 @@ BOOM!
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;select{}&lt;/code&gt; 会阻塞当前 goroutine，cpu 使用率将近 0%&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;参考：&lt;/p&gt;
+&lt;h1 id=&quot;参考&quot;&gt;参考：&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://tiancaiamao.gitbooks.io/go-internals/content/zh/01.3.html&quot;&gt;Golang 内存模型&lt;/a&gt;&lt;/p&gt;
 
