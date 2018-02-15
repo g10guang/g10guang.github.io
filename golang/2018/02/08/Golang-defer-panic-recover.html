@@ -316,12 +316,28 @@ exit status 2
 <p>那该如何办？</p>
 
 <ol>
-  <li>
-    <p>如果没有特殊要求，就直接使用内置函数 <code class="highlighter-rouge">errors.New()</code> 创建一个错误</p>
-  </li>
-  <li>
-    <p>采用自定义错误，再对函数做一层封装，如下：</p>
-  </li>
+  <li>如果没有特殊要求，就直接使用内置函数 <code class="highlighter-rouge">errors.New()</code> 创建一个错误，其在 <code class="highlighter-rouge">errors/errors.go</code> 中的剪短源码如下：</li>
+</ol>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">errors</span><span class="x">
+
+</span><span class="c">// New returns an error that formats as the given text.</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="n">New</span><span class="p">(</span><span class="n">text</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">error</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="o">&amp;</span><span class="n">errorString</span><span class="p">{</span><span class="n">text</span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="c">// errorString is a trivial implementation of error.</span><span class="x">
+</span><span class="k">type</span><span class="x"> </span><span class="n">errorString</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">e</span><span class="x"> </span><span class="o">*</span><span class="n">errorString</span><span class="p">)</span><span class="x"> </span><span class="n">Error</span><span class="p">()</span><span class="x"> </span><span class="kt">string</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">e</span><span class="o">.</span><span class="n">s</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<ol>
+  <li>采用自定义错误，再对函数做一层封装，如下：</li>
 </ol>
 
 <div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">MyError</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{}</span><span class="x">
