@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>《Go程序设计语言》笔记二 | 刘曦光</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="《Go程序设计语言》笔记二" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="接口 interface" />
+<meta property="og:description" content="接口 interface" />
+<link rel="canonical" href="http://localhost:4000/golang/2018/03/03/the-go-programming-language-note2.html" />
+<meta property="og:url" content="http://localhost:4000/golang/2018/03/03/the-go-programming-language-note2.html" />
+<meta property="og:site_name" content="刘曦光" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-03T12:00:05+08:00" />
+<script type="application/ld+json">
+{"description":"接口 interface","@type":"BlogPosting","url":"http://localhost:4000/golang/2018/03/03/the-go-programming-language-note2.html","headline":"《Go程序设计语言》笔记二","dateModified":"2018-03-03T12:00:05+08:00","datePublished":"2018-03-03T12:00:05+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/golang/2018/03/03/the-go-programming-language-note2.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="刘曦光" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">刘曦光</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">《Go程序设计语言》笔记二</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-03-03T12:00:05+08:00" itemprop="datePublished">
+        
+        Mar 3, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="接口-interface">接口 interface</h1>
+
+<p>从概念上讲，一个接口类型的值（简称接口值）有两部分构成：具体类型和该类型的值。二者成为接口的动态类型和动态值。接口的零值就是动态类型和动态值都是 nil。</p>
+
+<p>将一个变量赋予接口值，会发生变量值的复制。</p>
+
+<p>接口值可以用 <code class="highlighter-rouge">==</code> <code class="highlighter-rouge">!=</code> 操作符来比较，如果两个接口值都是 nil 或者二者的动态类型完全一致且动态值相等（使用动态类型的 <code class="highlighter-rouge">==</code> 操作符来做比较），那么两个接口值相等。因为接口值是可以比较的，所以他们可以作为 map 的键，也可以作为 switch 语句的操作数。</p>
+
+<blockquote>
+  <p>注意：如果接口的动态类型是不可以比较的，而使用了 <code class="highlighter-rouge">==</code> <code class="highlighter-rouge">!=</code> 比较操作符，则会可能触发宕机</p>
+</blockquote>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">x</span><span class="x"> </span><span class="k">interface</span><span class="p">{}</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{}</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">x</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="n">x</span><span class="p">)</span><span class="x"> </span><span class="c">// 宕机</span><span class="x">
+</span></code></pre></div></div>
+
+<p><strong>含有空指针的非空接口</strong></p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">handle</span><span class="p">(</span><span class="n">v</span><span class="x"> </span><span class="k">interface</span><span class="p">{})</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="n">v</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"v is nil"</span><span class="p">)</span><span class="x">
+    </span><span class="p">}</span><span class="x"> </span><span class="k">else</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"v is not nil"</span><span class="p">)</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">var</span><span class="x"> </span><span class="n">x</span><span class="x"> </span><span class="o">*</span><span class="kt">int</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="no">nil</span><span class="x">
+    </span><span class="n">handle</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>虽然 <code class="highlighter-rouge">x == nil</code>，但是调用 handle 方法时，实际上 v 接收到的是一个类型为 <code class="highlighter-rouge">*int</code>，值为 nil 的值。所以 <code class="highlighter-rouge">v == nil</code> 并不成立，因为它确实装载了一个变量。</p>
+
+<h2 id="sort">sort</h2>
+
+<p>sort 包提供了针对任意序列根据任意排序函数原地排序的功能。sort.Sort 函数（使用快速排序算法）对序列和其中的元素布局无任何要求，它使用 sort.Interface 接口来指定通用排序算法和每个具体的序列类型之间的协议。</p>
+
+<p>对于排序我们需要知道的是需要排序的元素的长度、如何比较两个元素的大小以及如何交换两个元素。而 sort.Interface 接口就定义了三个对应的方法。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">sort</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Interface</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Len</span><span class="p">()</span><span class="x"> </span><span class="kt">int</span><span class="x">
+    </span><span class="n">Less</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="x"> </span><span class="n">j</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="kt">bool</span><span class="x">
+    </span><span class="n">Swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="x"> </span><span class="n">j</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">stringSlice</span><span class="x"> </span><span class="p">[]</span><span class="kt">string</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="n">stringSlice</span><span class="p">)</span><span class="x"> </span><span class="n">Len</span><span class="p">()</span><span class="x"> </span><span class="kt">int</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="n">stringSlice</span><span class="p">)</span><span class="x"> </span><span class="n">Less</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="x"> </span><span class="n">j</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="kt">bool</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="n">stringSlice</span><span class="p">)</span><span class="x"> </span><span class="n">Swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="x"> </span><span class="n">j</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="x"> </span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="x"> </span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">stringSlice</span><span class="p">{</span><span class="s">"hello"</span><span class="p">,</span><span class="x"> </span><span class="s">"world"</span><span class="p">,</span><span class="x"> </span><span class="s">"哈哈"</span><span class="p">,</span><span class="x"> </span><span class="s">"abc"</span><span class="p">}</span><span class="x">
+    </span><span class="n">sort</span><span class="o">.</span><span class="n">Sort</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="x">  </span><span class="c">// [abc hello world 哈哈]</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">r.URL</code> 带有 query 参数</li>
+  <li><code class="highlighter-rouge">r.URL.Path</code> 不带 query 参数</li>
+</ul>
+
+<h2 id="接口类型断言">接口类型断言</h2>
+
+<p>判断该接口变量中存储的是否是某类型</p>
+
+<p>假设有：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">w</span><span class="x"> </span><span class="n">io</span><span class="o">.</span><span class="n">Writer</span><span class="x">
+</span><span class="n">w</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">os</span><span class="o">.</span><span class="n">Stdout</span><span class="x">
+</span></code></pre></div></div>
+
+<p>有三种用法：</p>
+<ol>
+  <li><code class="highlighter-rouge">f := w.(*os.File)</code> 只有一个结果，如果 w 中的变量类型不是 <code class="highlighter-rouge">*os.File</code> 就会触发 panic</li>
+  <li><code class="highlighter-rouge">f, ok := w.(*os.File)</code> 有两个结果，如果 w 中的变量类型不是 <code class="highlighter-rouge">*os.File</code> 不会触发 panic，但是 <code class="highlighter-rouge">ok == false</code>，f 中存储的是类型 <code class="highlighter-rouge">*os.File</code> 的零值，也就是 nil，常配合 if 使用</li>
+</ol>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="x"> </span><span class="n">f</span><span class="p">,</span><span class="x"> </span><span class="n">ok</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">w</span><span class="o">.</span><span class="p">(</span><span class="o">*</span><span class="n">os</span><span class="o">.</span><span class="n">File</span><span class="p">);</span><span class="x"> </span><span class="n">ok</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="c">//...</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<ol>
+  <li>配合 switch 使用，tyoe-switch 语法</li>
+</ol>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span><span class="x"> </span><span class="n">w</span><span class="o">.</span><span class="p">(</span><span class="k">type</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="n">T1</span><span class="o">:</span><span class="x">
+        </span><span class="c">//...</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="n">T2</span><span class="o">:</span><span class="x">
+        </span><span class="c">//...</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="n">T3</span><span class="o">:</span><span class="x">
+        </span><span class="c">//...</span><span class="x">
+    </span><span class="k">default</span><span class="o">:</span><span class="x">
+        </span><span class="c">//...</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>type-switch 不能配合 fallthrough 使用</p>
+</blockquote>
+
+<h2 id="关于接口的建议">关于接口的建议</h2>
+
+<p><strong>以下是来自《Go程序设计语言》中关于接口的建议：</strong></p>
+
+<ul>
+  <li>仅在两个或多个具体类型需要按统一的方式处理时才需要接口</li>
+  <li>设计新类型时越小的接口越容易满足，一个不错的接口设计经验是<em>仅要你所需要的</em></li>
+</ul>
+
+<p>通过接口可以实现灵活的动态性，给予接口的方法可以提供良好的抽象，提高代码复用。</p>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/golang/2018/03/03/the-go-programming-language-note2.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">刘曦光</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              刘曦光
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:g10guang@foxmail.com">g10guang@foxmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/g10guang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">g10guang</span></a></li>
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
