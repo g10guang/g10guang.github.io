@@ -167,17 +167,17 @@
 
 <p>查看某个包内的 go 文件：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go list -f={{.GoFiles}} fmt
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go list -f= fmt
 </code></pre></div></div>
 
 <p>查看某个包内的测试文件：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go list -f={{.TestGoFiles}} fmt
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go list -f= fmt
 </code></pre></div></div>
 
 <p>查看某个包的外部测试包：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go list -f={{.XTestGoFiles}} fmt
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go list -f= fmt
 </code></pre></div></div>
 
 <p>如果一个包内的某些函数需要进行白盒测试，而这些函数又正巧是不可导出的呢？</p>
