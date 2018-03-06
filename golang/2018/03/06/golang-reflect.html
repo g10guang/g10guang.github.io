@@ -12,13 +12,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="反射" />
 <meta property="og:description" content="反射" />
-<link rel="canonical" href="http://localhost:4000/golang/2018/02/04/golang-reflect.html" />
-<meta property="og:url" content="http://localhost:4000/golang/2018/02/04/golang-reflect.html" />
+<link rel="canonical" href="http://localhost:4000/golang/2018/03/06/golang-reflect.html" />
+<meta property="og:url" content="http://localhost:4000/golang/2018/03/06/golang-reflect.html" />
 <meta property="og:site_name" content="刘曦光" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-02-04T09:00:05+08:00" />
+<meta property="article:published_time" content="2018-03-06T09:00:05+08:00" />
 <script type="application/ld+json">
-{"description":"反射","@type":"BlogPosting","url":"http://localhost:4000/golang/2018/02/04/golang-reflect.html","headline":"Golang 反射","dateModified":"2018-02-04T09:00:05+08:00","datePublished":"2018-02-04T09:00:05+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/golang/2018/02/04/golang-reflect.html"},"@context":"http://schema.org"}</script>
+{"description":"反射","@type":"BlogPosting","url":"http://localhost:4000/golang/2018/03/06/golang-reflect.html","headline":"Golang 反射","dateModified":"2018-03-06T09:00:05+08:00","datePublished":"2018-03-06T09:00:05+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/golang/2018/03/06/golang-reflect.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link rel="stylesheet" href="/assets/main.css">
@@ -82,15 +82,33 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Golang 反射</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2018-02-04T09:00:05+08:00" itemprop="datePublished">
+      <time class="dt-published" datetime="2018-03-06T09:00:05+08:00" itemprop="datePublished">
         
-        Feb 4, 2018
+        Mar 6, 2018
       </time>
       </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
     <h1 id="反射">反射</h1>
+
+<p>Go 语言提供一种机制，在编译时不知道类型的情况下，可更新变量、在运行时查看值、调用方法以及直接对它们的布局进行操作，这种机制成为反射。通过反射我们甚至可以访问结构体中的非导出成员，但是不能够修改它们。</p>
+
+<p><strong>为什么使用反射？</strong></p>
+
+<p>原因：有时需要写一个函数有能力统一处理各种值类型的函数，而这些类型可能无法共享同一个接口，也可能内存布局未知，也有可能这个类型在我们设计函数时还不存在，甚至这个类型会同时存在上面的三种问题。</p>
+
+<p><strong>注意事项</strong></p>
+
+<ol>
+  <li>基于反射的代码非常脆弱，如果使用明确的类型进行操作，在编译期间编译器能够识别出其中的错误，而使用反射错误只有在运行时才会发现</li>
+  <li>反射降低代码可读性</li>
+  <li>使用反射比使用特定类型优化的函数慢一两个数量级</li>
+</ol>
+
+<blockquote>
+  <p>尽可能避免反射</p>
+</blockquote>
 
 <p>曾阅读<a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2650996069&amp;idx=1&amp;sn=63e7f5d5f91f9d84f1c3278426f6edf6&amp;chksm=bdbf05368ac88c20c273f325acc257811d6ee7534df30ace674f5c7eeb0c7986984dca209131&amp;scene=21#wechat_redirect">今日头条中关于 Golang 优化</a>的一篇文章，说尽可能不要用反射</p>
 
@@ -118,6 +136,10 @@
 
 <p>上述发生的是 copy 复制，也就是说 interface 变量底层真实存储的是一个跟 <code class="highlighter-rouge">obj</code> 完全不同的变量，所以 interface 中的 <code class="highlighter-rouge">data</code> 与 <code class="highlighter-rouge">obj</code> 是独立变化的</p>
 
+<p>reflect 包下定义了两个重要的类型：Type 和 Value。Type 表示 Go 语言的一个类型，它是一个有很多方法的接口，这些方法可以用来识别类型以及透视类型的组成部分，比如一个结构的各个字段或者一个函数的各个参数。</p>
+
+<p>应该尽可能避免在包的 API 里面暴露反射相关内容。</p>
+
 <div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">x</span><span class="x"> </span><span class="kt">float64</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">3.4</span><span class="x">
 </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">TypeOf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="x">      </span><span class="c">// 获取 x 类型</span><span class="x">
 </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="x">     </span><span class="c">// 获取 x 值</span><span class="x">
@@ -127,7 +149,7 @@
 
 <div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">x</span><span class="x"> </span><span class="kt">float64</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">3.4</span><span class="x">
 </span><span class="n">v</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="x">
-</span><span class="k">switch</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">King</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+</span><span class="k">switch</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Kind</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
     </span><span class="k">case</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">Int</span><span class="o">:</span><span class="x">
         </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">Int</span><span class="p">(()))</span><span class="x">
     </span><span class="k">case</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">Float64</span><span class="o">:</span><span class="x">
@@ -171,10 +193,63 @@
 </span><span class="n">v</span><span class="o">.</span><span class="n">SetFloat</span><span class="p">(</span><span class="m">2.5</span><span class="p">)</span><span class="x">
 </span></code></pre></div></div>
 
+<p>会被抛出：</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>panic: reflect: reflect.Value.SetFloat using unaddressable value
 </code></pre></div></div>
 
-<p>会被抛出，原因不是 2.5 不能够被寻址，而是 v 不是可以修改的</p>
+<p>原因是 v 不能够被寻址，从而不能够被修改。</p>
+
+<p><strong>什么样的变量在反射后能够被寻址？</strong></p>
+
+<p>简单地，可以使用 <code class="highlighter-rouge">Value.CanAddr()</code> 判断。</p>
+
+<p>像是一个整数 123、浮点数 3.14，就是典型的不可寻址的，为什么？因为只有变量才能够被寻址。但为什么上例中 x 是变量但是错误显示 x 无法寻址呢？因为 <code class="highlighter-rouge">reflect.ValueOf(v interface{})</code> 参数接收的是一个 interface，而我们知道 interface 中的值存储动态类型以及动态值，在参数传递中，会进行参数的复制，也就是动态值只是一个 copy，改一个 copy 的值有意义吗？显然没有意义。</p>
+
+<p>那到底什么才能够在反射后能够被寻址啊！！！</p>
+
+<p>当传递给 <code class="highlighter-rouge">reflect.ValueOf(pointer)</code> 函数是一个指针的时候可以被寻址。因为此时 interface 里面存储的是指针，可以通过指针修改实参的值。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">2</span><span class="x">
+</span><span class="n">a</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="x">
+</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="x">
+</span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">)</span><span class="x">
+</span><span class="n">d</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">c</span><span class="o">.</span><span class="n">Elem</span><span class="p">()</span><span class="x">               </span><span class="c">// 取得 &amp;x 对应的值，相当于 *(&amp;x)==x</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">CanAddr</span><span class="p">())</span><span class="x">    </span><span class="c">// false</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">CanAddr</span><span class="p">())</span><span class="x">    </span><span class="c">// false</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">CanAddr</span><span class="p">())</span><span class="x">    </span><span class="c">// false</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">CanAddr</span><span class="p">())</span><span class="x">    </span><span class="c">// true</span><span class="x">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">c.Elem()</code> 就是取相同 <code class="highlighter-rouge">&amp;x</code> 指向内存的变量，也就是 x 的值。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="m">1</span><span class="p">))</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="x">  </span><span class="c">// 1</span><span class="x">
+</span></code></pre></div></div>
+
+<p><strong>什么样的变量在反射后能够被修改？</strong></p>
+
+<ol>
+  <li>首先该变量应该是能够被寻址的，连寻址都不能够做到，也就是连变量到底存储的位置都不知道，谈何修改。</li>
+  <li>在结构体中，该成员是导出的。因为执行修改的函数不在该变量声明的包内，别的包是不能访问另一个包的非导出成员的。</li>
+</ol>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">x</span><span class="x"> </span><span class="k">struct</span><span class="p">{</span><span class="x">
+    </span><span class="n">a</span><span class="x"> </span><span class="kt">int</span><span class="x">
+    </span><span class="n">A</span><span class="x"> </span><span class="kt">int</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span><span class="n">a</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">)</span><span class="x">
+</span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">a</span><span class="o">.</span><span class="n">Elem</span><span class="p">()</span><span class="x">
+</span><span class="n">b</span><span class="o">.</span><span class="n">FieldByName</span><span class="p">(</span><span class="s">"A"</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="m">10</span><span class="p">))</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="x">  </span><span class="c">// {0 10}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>如果以上代码改为</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">b</span><span class="o">.</span><span class="n">FieldByName</span><span class="p">(</span><span class="s">"a"</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">reflect</span><span class="o">.</span><span class="n">ValueOf</span><span class="p">(</span><span class="m">10</span><span class="p">))</span><span class="x">
+</span></code></pre></div></div>
+
+<p>会引发宕机：<code class="highlighter-rouge">panic: reflect: reflect.Value.Set using value obtained using unexported field</code>。最恐怖的是这是运行时的宕机，而不是编译失败，如果真实项目中运行出现 panic 宕机真实灾难。</p>
 
 <p>通过 <code class="highlighter-rouge">CanSet</code> 方法查看某个 reflection object 是否可以修改</p>
 
@@ -252,7 +327,7 @@
 
   
 
-  <a class="u-url" href="/golang/2018/02/04/golang-reflect.html" hidden></a>
+  <a class="u-url" href="/golang/2018/03/06/golang-reflect.html" hidden></a>
 </article>
 
       </div>
