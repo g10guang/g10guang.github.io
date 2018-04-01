@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>utf8 in Golang | 刘曦光</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="utf8 in Golang" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="为什么记录下这文章？" />
+<meta property="og:description" content="为什么记录下这文章？" />
+<link rel="canonical" href="http://localhost:4000/golang/2018/04/01/utf8-in-golang.html" />
+<meta property="og:url" content="http://localhost:4000/golang/2018/04/01/utf8-in-golang.html" />
+<meta property="og:site_name" content="刘曦光" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-04-01T09:00:05+08:00" />
+<script type="application/ld+json">
+{"description":"为什么记录下这文章？","@type":"BlogPosting","url":"http://localhost:4000/golang/2018/04/01/utf8-in-golang.html","headline":"utf8 in Golang","dateModified":"2018-04-01T09:00:05+08:00","datePublished":"2018-04-01T09:00:05+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/golang/2018/04/01/utf8-in-golang.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="刘曦光" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">刘曦光</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">utf8 in Golang</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-04-01T09:00:05+08:00" itemprop="datePublished">
+        
+        Apr 1, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="为什么记录下这文章">为什么记录下这文章？</h1>
+
+<p>刷算法题的时候很多时候遇到字符串操作问题，我比较喜欢使用 Python 或者 Golang 进行算法的实现，但是比较坑的一点就是 Golang 的字符串操作比较麻烦。</p>
+
+<p>怎么麻烦？我举几个例子：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">x</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="s">"hello"</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="c">// x 的类型是 rune，其实就是对应字符的 utf8 编码</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="s">"刘曦光"</span><span class="x">
+</span><span class="n">s</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="kt">uint8</span><span class="p">(</span><span class="m">229</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<p>上面我标明是 uint8 的原因是 Go 是强类型语言，甚至没有像 C 一样的隐式转化。不同类型之间是不能够直接进行互操作的。比如 int 与 uint8 就无法比较大小。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">len</span><span class="p">(</span><span class="s">"刘曦光"</span><span class="p">)</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="m">9</span><span class="x">
+</span></code></pre></div></div>
+
+<p>返回的是底层字符串字节所占用的长度，而不是字符串中对应 utf8 字符的个数。</p>
+
+<p>如果我想取字符串中的第 k 个字符该咋搞呢？</p>
+
+<p>如果字符串只包含 ASCII 符号（ASCII 所有字符编码长度为 1Byte），那么我们完全可以使用下标解决：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="s">"hello"</span><span class="x">
+</span><span class="n">s</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="kt">byte</span><span class="p">(</span><span class="sc">'h'</span><span class="p">)</span><span class="x">
+</span><span class="n">s</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="kt">byte</span><span class="p">(</span><span class="sc">'e'</span><span class="p">)</span><span class="x">
+</span><span class="n">s</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="kt">byte</span><span class="p">(</span><span class="sc">'l'</span><span class="p">)</span><span class="x">
+</span><span class="n">s</span><span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="kt">byte</span><span class="p">(</span><span class="sc">'l'</span><span class="p">)</span><span class="x">
+</span><span class="n">s</span><span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="kt">byte</span><span class="p">(</span><span class="sc">'o'</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<p>但是如果遇到中文等 utf8 编码长度不止 1Byte 的呢？怎么办？</p>
+
+<p>比较简单的解决方案：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">find</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="n">index</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="kt">rune</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="p">,</span><span class="x"> </span><span class="n">v</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="k">range</span><span class="x"> </span><span class="n">s</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="n">index</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="k">return</span><span class="x"> </span><span class="n">v</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="kt">rune</span><span class="p">(</span><span class="m">0</span><span class="p">),</span><span class="x"> </span><span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="s">"Out of range."</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<h1 id="unicodeutf8">unicode/utf8</h1>
+
+<p>求助 unicode/utf8 官方库的帮助，遗憾的是该库中也没有特别丰富的函数支持，但是总比我们自己写轮子好。</p>
+
+<p>以下例子隐含：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span><span class="x"> </span><span class="p">(</span><span class="x">
+    </span><span class="s">"unicode/utf8"</span><span class="x">
+    </span><span class="s">"fmt"</span><span class="x">
+</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="遍历-utf8-字符串">遍历 utf8 字符串</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"今天愚人节"</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">r</span><span class="p">,</span><span class="x"> </span><span class="n">size</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">utf8</span><span class="o">.</span><span class="n">DecodeRuneInString</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="p">])</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="x">
+        </span><span class="n">i</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="n">size</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>每次取字符串的一个切片，对字符串取切片的一个开销很小的操作，新的切片会引用原字符串。</p>
+
+<h2 id="逆序遍历-utf8">逆序遍历 utf8</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"今天愚人节"</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&gt;</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">r</span><span class="p">,</span><span class="x"> </span><span class="n">size</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">utf8</span><span class="o">.</span><span class="n">DecodeLastRuneInString</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">:</span><span class="n">i</span><span class="p">])</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="x">
+        </span><span class="n">i</span><span class="x"> </span><span class="o">-=</span><span class="x"> </span><span class="n">size</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="取-utf8-字符串长度">取 utf8 字符串长度</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"今天愚人节"</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">utf8</span><span class="o">.</span><span class="n">RuneCountInString</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="取特定下标的-utf8-字符">取特定下标的 utf8 字符</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"今天愚人节"</span><span class="x">
+    </span><span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%q"</span><span class="p">,</span><span class="x"> </span><span class="kt">string</span><span class="p">([]</span><span class="kt">rune</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="m">3</span><span class="p">]))</span><span class="x">   </span><span class="c">// "人"</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>这里我们先把字符串 s 转化为 []rune 类型，也就是相当于把字符串中的每一个 utf8 字符解码出来。如果字符串长度不是非常大的话，建议先将 string 转化为 []rune，但如果字符串很大的场景下，这个方法并不适用</p>
+
+<p><strong>改良版</strong></p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">stringIndex</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="n">index</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="kt">rune</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="x"> </span><span class="n">c</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">r</span><span class="p">,</span><span class="x"> </span><span class="n">size</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">utf8</span><span class="o">.</span><span class="n">DecodeLastRuneInString</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="p">])</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="n">c</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="n">index</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="k">return</span><span class="x"> </span><span class="n">r</span><span class="p">,</span><span class="x"> </span><span class="no">nil</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+        </span><span class="n">i</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="n">size</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="m">0</span><span class="p">,</span><span class="x"> </span><span class="n">errors</span><span class="o">.</span><span class="n">New</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"index=%d len(s)=%d index out of range"</span><span class="p">,</span><span class="x"> </span><span class="n">index</span><span class="p">,</span><span class="x"> </span><span class="n">c</span><span class="p">))</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p>unicode/utf8 下的方法并不是很丰富，在刷算法题中可能用到的就是上面几个，上面对应的 string 方法都有一个面相 []byte 的版本。</p>
+
+<h1 id="strings">strings</h1>
+
+<p>每个语言都会有非常丰富的对应字符串的操作方法集和，Go 的字符串操作在 strings 包。</p>
+
+<p>以下简单介绍以下 strings 的基本操作</p>
+
+<h2 id="比较两个字符串">比较两个字符串</h2>
+
+<p>最简单的方法是使用 <code class="highlighter-rouge">&lt;  &gt;  ==  &gt;=  &lt;=</code> 等操作符实现，非常灵活。</p>
+
+<p>也可以使用 <code class="highlighter-rouge">strings.Compare(a, b string)</code> 方法实现，直接使用操作符返回的是 bool 值，而 <code class="highlighter-rouge">strings.Compare</code> 返回 -1 0 1 三者之一。想到什么没有？可以使用 switch 语句，减少大量的 if-else 语句。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">main</span><span class="p">()</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">a</span><span class="p">,</span><span class="x"> </span><span class="n">b</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="s">"hello"</span><span class="p">,</span><span class="x"> </span><span class="s">"world"</span><span class="x">
+    </span><span class="k">switch</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">Compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="x"> </span><span class="n">b</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="m">0</span><span class="o">:</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%q==%q"</span><span class="p">,</span><span class="x"> </span><span class="n">a</span><span class="p">,</span><span class="x"> </span><span class="n">b</span><span class="p">)</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="o">-</span><span class="m">1</span><span class="o">:</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%q&lt;%q"</span><span class="p">,</span><span class="x"> </span><span class="n">a</span><span class="p">,</span><span class="x"> </span><span class="n">b</span><span class="p">)</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="m">1</span><span class="o">:</span><span class="x">
+        </span><span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%q&gt;%q"</span><span class="p">,</span><span class="x"> </span><span class="n">a</span><span class="p">,</span><span class="x"> </span><span class="n">b</span><span class="p">)</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="判断是否字串">判断是否字串</h2>
+
+<p>这个问题是不是与搜索字串及其下标很相似？</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">strings</span><span class="o">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="x"> </span><span class="n">substr</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">bool</span><span class="x">
+</span></code></pre></div></div>
+
+<p>判断字符串是否包含某个字符集和</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">strings</span><span class="o">.</span><span class="n">ContainsAny</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="x"> </span><span class="n">chars</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">bool</span><span class="x">
+</span></code></pre></div></div>
+
+<p>没错，判断是否包含子串就是搜索子串下标，然后判断搜索下标是否为 -1。</p>
+
+<h2 id="判断两个字符串是否相等-case-insensitive">判断两个字符串是否相等 case-insensitive</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">EqualFold</span><span class="p">(</span><span class="s">"hello你好"</span><span class="p">,</span><span class="x"> </span><span class="s">"HELLO你好"</span><span class="p">))</span><span class="x">    </span><span class="c">// true</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">EqualFold</span><span class="p">(</span><span class="s">"hello"</span><span class="p">,</span><span class="x"> </span><span class="s">"world"</span><span class="p">))</span><span class="x">    </span><span class="c">// false</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="字符串切割">字符串切割</h2>
+
+<p>通过 unicode.IsSpace 判断是否是空白字符，然后通过空白字符进行切割</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Fields</span><span class="p">(</span><span class="s">"hello</span><span class="se">\t</span><span class="s">world 你好</span><span class="se">\n</span><span class="s">世界"</span><span class="p">))</span><span class="x">
+</span><span class="c">// [hello world 你好 世界]</span><span class="x">
+</span></code></pre></div></div>
+
+<p>如果需要进行切割的不是空白字符，需要自定义方法怎么办？</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">FieldsFunc</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">r</span><span class="x"> </span><span class="kt">rune</span><span class="p">)</span><span class="x"> </span><span class="kt">bool</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="sc">' '</span><span class="x">
+</span><span class="p">}))</span><span class="x">
+</span><span class="c">// [hello world]</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="前后缀">前后缀</h2>
+
+<p>判断是否包含前缀</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">HasPrefix</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"hello"</span><span class="p">))</span><span class="x"> </span><span class="c">// true</span><span class="x">
+</span></code></pre></div></div>
+
+<p>判断是否包含后缀</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">HasSuffix</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"world"</span><span class="p">))</span><span class="x">  </span><span class="c">// true</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="子串所在位置">子串所在位置</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"world"</span><span class="p">))</span><span class="x">  </span><span class="c">// 6</span><span class="x">
+</span></code></pre></div></div>
+
+<p>上面例子是第一个出现的位置，下面这个例子我们求最后一次出现的位置</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">LastIndex</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">))</span><span class="x">  </span><span class="c">// 9</span><span class="x">
+</span></code></pre></div></div>
+
+<p>如果我们要求符合某个特别条件的字符的位置呢？</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">IndexFunc</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">r</span><span class="x"> </span><span class="kt">rune</span><span class="p">)</span><span class="x"> </span><span class="kt">bool</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">1</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="sc">'e'</span><span class="x">
+</span><span class="p">}))</span><span class="x">
+</span></code></pre></div></div>
+
+<p>对应的也有 <code class="highlighter-rouge">strings.LastIndexFunc(s string, f func(r rune) bool)</code></p>
+
+<h2 id="拼接字符串">拼接字符串</h2>
+
+<p>如果我们有一个字符串slice []string，将他们拼装起来，并且指定分隔符</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Join</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">"hello"</span><span class="p">,</span><span class="x"> </span><span class="s">"world"</span><span class="p">},</span><span class="x"> </span><span class="s">"/"</span><span class="p">))</span><span class="x">  </span><span class="c">// hello/world</span><span class="x">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">fmt.Sprintf()</code> 为我们提供了非常强大的拼装字符串的能力，而且能够指定输出的格式，与 <code class="highlighter-rouge">fmt.Printf</code> 类似，不同的是前者返回格式化后的字符串，后者将该字符串写入到标准输出流。比如将十进制数转化为对应的二进制字符串：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="s">"%b</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="x"> </span><span class="m">100</span><span class="p">)</span><span class="x">
+</span><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="x">  </span><span class="c">// 1100100</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="map-操作">Map 操作</h2>
+
+<p>如果使用过 Python 的 map filter reduce 函数的会觉得这样用起来写代码非常舒服，不用写很多循环，数据像是管道一样流动。</p>
+
+<p>Go 对字符串也有对应的支持，下面演示一个对简单的<a href="https://en.wikipedia.org/wiki/Caesar_cipher">凯撒密码</a>实现：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">Caesar</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">strings</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="k">func</span><span class="p">(</span><span class="n">r</span><span class="x"> </span><span class="kt">rune</span><span class="p">)</span><span class="x"> </span><span class="kt">rune</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="sc">'a'</span><span class="x"> </span><span class="o">&lt;=</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="o">&amp;&amp;</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="o">&lt;=</span><span class="x"> </span><span class="sc">'z'</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="n">r</span><span class="x"> </span><span class="o">-=</span><span class="x"> </span><span class="m">3</span><span class="x">
+            </span><span class="k">if</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="sc">'a'</span><span class="x"> </span><span class="p">{</span><span class="x">
+                </span><span class="n">r</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="m">26</span><span class="x">
+            </span><span class="p">}</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+        </span><span class="k">return</span><span class="x"> </span><span class="n">r</span><span class="x">
+    </span><span class="p">},</span><span class="x"> </span><span class="n">s</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="字符串切割-1">字符串切割</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Split</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">))</span><span class="x">  </span><span class="c">// [he  o wor d]</span><span class="x">
+</span></code></pre></div></div>
+
+<p>上面例子会把所有含有子串的都切割开，但是如果我们只是想切割指定数量的字符串呢？</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">SplitN</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">,</span><span class="x"> </span><span class="m">2</span><span class="p">))</span><span class="x">  </span><span class="c">// [he lo world]</span><span class="x">
+</span></code></pre></div></div>
+
+<p>要求高一点想要保留子串怎么办？</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">SplitAfter</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">))</span><span class="x"> </span><span class="c">// [hel l o worl d]</span><span class="x">
+</span></code></pre></div></div>
+
+<p>类似的，指定相应切割数量对应的方法：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">SplitAfterN</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">,</span><span class="x"> </span><span class="m">2</span><span class="p">))</span><span class="x"> </span><span class="c">// [hel lo world]</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="字符串复制增长-n-倍">字符串复制增长 N 倍</h2>
+
+<p>增长字符串除了 <code class="highlighter-rouge">+</code> 运算符，<code class="highlighter-rouge">strings.Join</code> 方法还可以使用以下方法：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Repeat</span><span class="p">(</span><span class="s">"i"</span><span class="p">,</span><span class="x"> </span><span class="m">10</span><span class="p">))</span><span class="x">    </span><span class="c">// iiiiiiiiii</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="大小写转换">大小写转换</h2>
+
+<p>这个功能手写也很简单，但是有轮子就别重复造了</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">ToLower</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="n">ToUpper</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span></code></pre></div></div>
+
+<p>Go 官方文档给出了一个例子，还可以自定义大小写转化的映射，有特殊需求的同学可以实现 unicode.SpecialCase。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">ToLowerSpecial</span><span class="p">(</span><span class="n">c</span><span class="x"> </span><span class="n">unicode</span><span class="o">.</span><span class="n">SpecialCase</span><span class="p">,</span><span class="x"> </span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="k">func</span><span class="x"> </span><span class="n">ToUpperSpecial</span><span class="p">(</span><span class="n">c</span><span class="x"> </span><span class="n">unicode</span><span class="o">.</span><span class="n">SpecialCase</span><span class="p">,</span><span class="x"> </span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span></code></pre></div></div>
+
+<p>对应的还有 <code class="highlighter-rouge">strings.ToTitle</code></p>
+
+<h2 id="统计子串出现的次数">统计子串出现的次数</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Count</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">))</span><span class="x"> </span><span class="c">// 3</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="去除特定前后缀">去除特定前后缀</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">Trim</span><span class="p">(</span><span class="n">s</span><span class="x"> </span><span class="kt">string</span><span class="p">,</span><span class="x"> </span><span class="n">cutset</span><span class="x"> </span><span class="kt">string</span><span class="p">)</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span></code></pre></div></div>
+
+<p>Trim 还有很多变种，比如 TrimPrefix、TrimSuffix 等。</p>
+
+<h2 id="子串替换">子串替换</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">,</span><span class="x"> </span><span class="s">"l"</span><span class="p">,</span><span class="x"> </span><span class="s">"L"</span><span class="p">,</span><span class="x"> </span><span class="m">2</span><span class="p">))</span><span class="x">    </span><span class="c">// heLLo world</span><span class="x">
+</span></code></pre></div></div>
+
+<h1 id="总结">总结</h1>
+
+<p><strong>工欲善其事，必先利其器</strong></p>
+
+<p>学习中、工作中需要掌握某些有利于提升我们效率的工具，比如对 IDE 快捷键、语言的标准库、第三方库等，要好好利用前人载的树来乘凉。Python 为什么在数据科学等领域如此火热呢？我想除了其自身特性外，更中要的是丰富的第三方库支持。很多不是 Python 开发的工具都有 Python 的接口实现，比如著名了 Tensorflow。</p>
+
+<p>学习不仅需要花大量时间，更重要的是提升效率。</p>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/golang/2018/04/01/utf8-in-golang.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">刘曦光</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              刘曦光
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:g10guang@foxmail.com">g10guang@foxmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/g10guang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">g10guang</span></a></li>
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
