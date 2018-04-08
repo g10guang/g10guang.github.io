@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>数组中的连续元素的最大和 | 刘曦光</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="数组中的连续元素的最大和" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="分治法" />
+<meta property="og:description" content="分治法" />
+<link rel="canonical" href="http://localhost:4000/%E7%AE%97%E6%B3%95/2018/04/08/%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84.html" />
+<meta property="og:url" content="http://localhost:4000/%E7%AE%97%E6%B3%95/2018/04/08/%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84.html" />
+<meta property="og:site_name" content="刘曦光" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-04-08T15:00:05+08:00" />
+<script type="application/ld+json">
+{"description":"分治法","@type":"BlogPosting","url":"http://localhost:4000/%E7%AE%97%E6%B3%95/2018/04/08/%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84.html","headline":"数组中的连续元素的最大和","dateModified":"2018-04-08T15:00:05+08:00","datePublished":"2018-04-08T15:00:05+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/%E7%AE%97%E6%B3%95/2018/04/08/%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="刘曦光" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">刘曦光</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">数组中的连续元素的最大和</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-04-08T15:00:05+08:00" itemprop="datePublished">
+        
+        Apr 8, 2018
+      </time>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="分治法">分治法</h1>
+
+<p>设数组左边界为 lo，右边界为 hi，即 <code class="highlighter-rouge">data[lo]...data[hi]</code>，可以计算出中点下标为：<code class="highlighter-rouge">mid = (hi+lo)/2</code>。</p>
+
+<p>数组中的连续元素的最大和一共有三种情况：</p>
+<ol>
+  <li>在 <code class="highlighter-rouge">data[lo:mid]</code> 中，也就是在左子数组中</li>
+  <li>在 <code class="highlighter-rouge">data[mid+1:]</code> 中，也就是在右子数组中</li>
+  <li>在 <code class="highlighter-rouge">data[x:y]</code> 中，其中 <code class="highlighter-rouge">x&lt;=mid&lt;=y</code> 也就是跨越左右子数组</li>
+</ol>
+
+<p>可以看出在上述情况中，问题可以分解为更小的子问题来解决，在原算法复杂度高于 O(n) 时，分治法可以提高时间效率，但是需要话费更大的空间，因为需要递归栈。</p>
+
+<p>撸起袖子写代码：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">MaxSubArrayDivideAndConquer</span><span class="p">(</span><span class="n">data</span><span class="x"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="kt">int</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="m">0</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="k">return</span><span class="x"> </span><span class="n">math</span><span class="o">.</span><span class="n">MinInt32</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="n">mid</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="x"> </span><span class="o">/</span><span class="x"> </span><span class="m">2</span><span class="x">
+    </span><span class="c">// 计算跨越中介的最大子数组</span><span class="x">
+    </span><span class="n">midmax</span><span class="p">,</span><span class="x"> </span><span class="n">sum</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">math</span><span class="o">.</span><span class="n">MinInt32</span><span class="p">,</span><span class="x"> </span><span class="m">0</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">mid</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&gt;=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">--</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">sum</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="n">sum</span><span class="x"> </span><span class="o">&gt;</span><span class="x"> </span><span class="n">midmax</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="n">midmax</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">sum</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">j</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">mid</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="m">1</span><span class="p">;</span><span class="x"> </span><span class="n">j</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">);</span><span class="x"> </span><span class="n">j</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">sum</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="n">sum</span><span class="x"> </span><span class="o">&gt;</span><span class="x"> </span><span class="n">midmax</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="n">midmax</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">sum</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="c">// 计算左数组中的最大值</span><span class="x">
+    </span><span class="n">l</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">MaxSubArrayDivideAndConquer</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">:</span><span class="n">mid</span><span class="p">])</span><span class="x">
+    </span><span class="c">// 计算右数组的最大值</span><span class="x">
+    </span><span class="n">r</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">MaxSubArrayDivideAndConquer</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">mid</span><span class="o">+</span><span class="m">1</span><span class="o">:</span><span class="p">])</span><span class="x">
+    </span><span class="k">var</span><span class="x"> </span><span class="n">max</span><span class="x"> </span><span class="kt">int</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="n">l</span><span class="x"> </span><span class="o">&gt;</span><span class="x"> </span><span class="n">r</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">max</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">l</span><span class="x">
+    </span><span class="p">}</span><span class="x"> </span><span class="k">else</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">max</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">r</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="k">if</span><span class="x"> </span><span class="n">midmax</span><span class="x"> </span><span class="o">&gt;</span><span class="x"> </span><span class="n">max</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="n">max</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">midmax</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">max</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<p><code class="highlighter-rouge">T(n) = T(n/2) + n</code></p>
+
+<ul>
+  <li>时间复杂度：<code class="highlighter-rouge">O(nlog(n))</code></li>
+  <li>空间复杂度：<code class="highlighter-rouge">O(log(n)</code></li>
+</ul>
+
+<p>其中 log(n) 为递归栈的深度，在递归树中，每一层都需要计算 n 个元素之和。</p>
+
+<h1 id="线性方法">线性方法</h1>
+
+<p>解决该问题还有一种效率更高的方法：</p>
+
+<p>每一个下标 j 都有可能是最大子数组的结束下标，计算以 j 结尾的最大子数组之和，只需要知道以 j-1 结尾的最大子数组之和就可以，公式表达为：</p>
+
+<p><code class="highlighter-rouge">m[j] = max(0, max[j-1]) + data[j]</code></p>
+
+<p>算法实现：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span><span class="x"> </span><span class="n">MaxSubArrayLinear</span><span class="p">(</span><span class="n">data</span><span class="x"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="kt">int</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">max</span><span class="p">,</span><span class="x"> </span><span class="n">leftSum</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">math</span><span class="o">.</span><span class="n">MinInt32</span><span class="p">,</span><span class="x"> </span><span class="n">math</span><span class="o">.</span><span class="n">MinInt32</span><span class="x">
+    </span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">0</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;</span><span class="x"> </span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">);</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="n">leftSum</span><span class="x"> </span><span class="o">&lt;=</span><span class="x"> </span><span class="m">0</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="n">leftSum</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="m">0</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+        </span><span class="n">leftSum</span><span class="x"> </span><span class="o">+=</span><span class="x"> </span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="x">
+        </span><span class="k">if</span><span class="x"> </span><span class="n">leftSum</span><span class="x"> </span><span class="o">&gt;</span><span class="x"> </span><span class="n">max</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="n">max</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">leftSum</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+    </span><span class="p">}</span><span class="x">
+    </span><span class="k">return</span><span class="x"> </span><span class="n">max</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre></div></div>
+
+<ul>
+  <li>时间复杂度：<code class="highlighter-rouge">O(n)</code></li>
+  <li>空间复杂度：<code class="highlighter-rouge">O(1)</code></li>
+</ul>
+
+<p><strong>好的算法实现起来往往是简单的，在时间和空间效率上更高</strong></p>
+
+<h1 id="总结">总结</h1>
+
+<p>最近笔试各大公司在最后算法题总是不能 AC，也在跟着这个<a href="https://github.com/CyC2018/Interview-Notebook/blob/master/notes/Leetcode%20%E9%A2%98%E8%A7%A3.md">仓库</a> 刷 leetcode 题目。</p>
+
+<p>最近很大的感受是，只有把思路理清楚后再写代码，即使是在笔试或者面试时候，不然逻辑上不可能有正确的代码，如果逻辑上（算法）本来就是错误的，用再多时间去写代码也是浪费时间而已。我之前就是还没理清思路就写代码，使得代码越来越丑（判断边界条件的代码越来越多），到后面调试的时候非常痛苦，当然凌乱的逻辑最后往往也是不能够 AC 的。</p>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/%E7%AE%97%E6%B3%95/2018/04/08/%E8%BF%9E%E7%BB%AD%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">刘曦光</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              刘曦光
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:g10guang@foxmail.com">g10guang@foxmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/g10guang"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">g10guang</span></a></li>
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>我会在这里分享我的成长经历、心得，既有IT方面的，也有生活读书方面的。</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
