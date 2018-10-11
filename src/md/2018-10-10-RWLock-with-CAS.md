@@ -2,7 +2,7 @@
 layout: post
 title:  "读写锁实现"
 date:   2018-10-10 20:00:05 +0800
-categories: 算法
+categories: 系统
 ---
 
 # In Short
